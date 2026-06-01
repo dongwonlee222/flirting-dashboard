@@ -632,23 +632,23 @@
         <h1>플러팅 운영 대시보드</h1>
         <p class="lead">가입, 승인 회원, 좋아요, 매칭, 채팅, 결제 신호를 Supabase 집계 기준으로 한 화면에서 확인합니다. 원본 고객 row 없이 운영 판단에 필요한 집계만 사용합니다.</p>
         <div class="hero-meta">
-          <span class="pill">스냅샷 2026-05-26</span>
-          <span class="pill">생성 2026. 05. 26. 15:50</span>
+          <span class="pill">스냅샷 2026-06-01</span>
+          <span class="pill">생성 2026. 06. 01. 12:30</span>
           <span class="pill">집계 전용</span>
         </div>
       </div>
       <div class="phone" aria-hidden="true">
         <div class="phone-screen">
-          <div class="phone-top"><span>9:41</span><span>10 matches</span></div>
+          <div class="phone-top"><span>9:41</span><span>8 matches</span></div>
           <div class="mini-summary">
-            <strong>실제 DB 집계</strong>
+            <strong>실제 회원 활동</strong>
             <div class="mini-list">
-              <div><span>users</span><strong>95</strong></div>
-              <div><span>likes</span><strong>293</strong></div>
-              <div><span>matches</span><strong>10</strong></div>
+              <div><span>users</span><strong>117</strong></div>
+              <div><span>likes</span><strong>480</strong></div>
+              <div><span>matches</span><strong>8</strong></div>
             </div>
           </div>
-          <div class="metric-note" style="text-align:center; margin-top:13px;">likes 293 · chats 6</div>
+          <div class="metric-note" style="text-align:center; margin-top:13px;">likes 480 · chats 6</div>
         </div>
       </div>
     </div>
@@ -658,29 +658,34 @@
     <div class="wrap">
       <section class="kpis" aria-label="핵심 지표">
         <div class="metric">
-          <div class="metric-name">Users</div>
-          <div class="metric-value">95</div>
-          <div class="metric-note">users 테이블 row count</div>
+          <div class="metric-name">실제 회원</div>
+          <div class="metric-value">117</div>
+          <div class="metric-note">현재 활동 가능 · 5/31 기준</div>
         </div>
         <div class="metric">
           <div class="metric-name">회원탈퇴</div>
-          <div class="metric-value">16</div>
-          <div class="metric-note">16.8% of users</div>
+          <div class="metric-value">18</div>
+          <div class="metric-note">누적 실제 가입 135명 중 탈퇴</div>
         </div>
         <div class="metric">
           <div class="metric-name">승인 회원</div>
-          <div class="metric-value">74</div>
-          <div class="metric-note">77.9% of users</div>
+          <div class="metric-value">113</div>
+          <div class="metric-note">96.6% of active users</div>
         </div>
         <div class="metric">
-          <div class="metric-name">Likes</div>
-          <div class="metric-value">293</div>
-          <div class="metric-note">3.08 likes per user</div>
+          <div class="metric-name">좋아요 활동</div>
+          <div class="metric-value">480</div>
+          <div class="metric-note">실제 회원 1명당 4.10건</div>
         </div>
         <div class="metric">
-          <div class="metric-name">Matches</div>
-          <div class="metric-value">10</div>
-          <div class="metric-note">3.4% of likes</div>
+          <div class="metric-name">매칭 활동</div>
+          <div class="metric-value">8</div>
+          <div class="metric-note">좋아요 대비 1.7%</div>
+        </div>
+        <div class="metric">
+          <div class="metric-name">제외 회원</div>
+          <div class="metric-value">55</div>
+          <div class="metric-note">관리자 생성 53 · 추가 가짜 2</div>
         </div>
       </section>
 
@@ -710,20 +715,20 @@
               <tr><th>날짜</th><th>회원가입</th><th>회원탈퇴</th><th>승인 회원</th><th>좋아요</th><th>매칭</th><th>구매</th></tr>
             </thead>
             <tbody>
-              <tr><td>2026.05.26</td><td>3</td><td>2</td><td>2</td><td>25</td><td>1</td><td>0</td></tr>
+              <tr><td>2026.05.31</td><td>20</td><td>1</td><td>20</td><td>74</td><td>0</td><td>0</td></tr>
+              <tr><td>2026.05.30</td><td>16</td><td>1</td><td>16</td><td>27</td><td>0</td><td>0</td></tr>
+              <tr><td>2026.05.29</td><td>6</td><td>0</td><td>6</td><td>24</td><td>0</td><td>0</td></tr>
+              <tr><td>2026.05.28</td><td>9</td><td>2</td><td>9</td><td>33</td><td>0</td><td>0</td></tr>
+              <tr><td>2026.05.27</td><td>4</td><td>1</td><td>3</td><td>34</td><td>1</td><td>0</td></tr>
+              <tr><td>2026.05.26</td><td>6</td><td>2</td><td>6</td><td>33</td><td>0</td><td>0</td></tr>
               <tr><td>2026.05.25</td><td>6</td><td>2</td><td>6</td><td>28</td><td>0</td><td>0</td></tr>
               <tr><td>2026.05.24</td><td>2</td><td>1</td><td>2</td><td>12</td><td>0</td><td>0</td></tr>
               <tr><td>2026.05.23</td><td>2</td><td>2</td><td>2</td><td>28</td><td>0</td><td>0</td></tr>
-              <tr><td>2026.05.22</td><td>11</td><td>1</td><td>11</td><td>13</td><td>0</td><td>0</td></tr>
-              <tr><td>2026.05.21</td><td>5</td><td>0</td><td>5</td><td>44</td><td>1</td><td>0</td></tr>
-              <tr><td>2026.05.20</td><td>7</td><td>0</td><td>5</td><td>16</td><td>0</td><td>0</td></tr>
+              <tr><td>2026.05.22</td><td>10</td><td>1</td><td>10</td><td>11</td><td>0</td><td>0</td></tr>
+              <tr><td>2026.05.21</td><td>5</td><td>0</td><td>5</td><td>40</td><td>1</td><td>0</td></tr>
+              <tr><td>2026.05.20</td><td>7</td><td>0</td><td>5</td><td>12</td><td>0</td><td>0</td></tr>
               <tr><td>2026.05.19</td><td>0</td><td>0</td><td>0</td><td>8</td><td>0</td><td>0</td></tr>
-              <tr><td>2026.05.18</td><td>8</td><td>2</td><td>3</td><td>8</td><td>0</td><td>0</td></tr>
-              <tr><td>2026.05.17</td><td>5</td><td>0</td><td>5</td><td>0</td><td>0</td><td>0</td></tr>
-              <tr><td>2026.05.16</td><td>2</td><td>0</td><td>2</td><td>0</td><td>0</td><td>0</td></tr>
-              <tr><td>2026.05.15</td><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>0</td></tr>
-              <tr><td>2026.05.14</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
-              <tr><td>2026.05.13</td><td>0</td><td>0</td><td>0</td><td>7</td><td>3</td><td>0</td></tr>
+              <tr><td>2026.05.18</td><td>3</td><td>2</td><td>3</td><td>8</td><td>0</td><td>0</td></tr>
             </tbody>
           </table>
         </div>
@@ -733,16 +738,20 @@
               <tr><th>날짜</th><th>전체 가입</th><th>남성 가입</th><th>여성 가입</th><th>미상</th><th>여성 비율</th></tr>
             </thead>
             <tbody>
+              <tr><td>2026.05.31</td><td>20</td><td>19</td><td>1</td><td>0</td><td>5.0%</td></tr>
+              <tr><td>2026.05.30</td><td>16</td><td>16</td><td>0</td><td>0</td><td>0.0%</td></tr>
+              <tr><td>2026.05.29</td><td>6</td><td>5</td><td>1</td><td>0</td><td>16.7%</td></tr>
+              <tr><td>2026.05.28</td><td>9</td><td>9</td><td>0</td><td>0</td><td>0.0%</td></tr>
               <tr><td>2026.05.27</td><td>4</td><td>3</td><td>1</td><td>0</td><td>25.0%</td></tr>
               <tr><td>2026.05.26</td><td>6</td><td>5</td><td>1</td><td>0</td><td>16.7%</td></tr>
               <tr><td>2026.05.25</td><td>6</td><td>5</td><td>1</td><td>0</td><td>16.7%</td></tr>
               <tr><td>2026.05.24</td><td>2</td><td>2</td><td>0</td><td>0</td><td>0.0%</td></tr>
               <tr><td>2026.05.23</td><td>2</td><td>2</td><td>0</td><td>0</td><td>0.0%</td></tr>
-              <tr><td>2026.05.22</td><td>11</td><td>9</td><td>2</td><td>0</td><td>18.2%</td></tr>
+              <tr><td>2026.05.22</td><td>10</td><td>8</td><td>2</td><td>0</td><td>20.0%</td></tr>
               <tr><td>2026.05.21</td><td>5</td><td>5</td><td>0</td><td>0</td><td>0.0%</td></tr>
               <tr><td>2026.05.20</td><td>7</td><td>5</td><td>2</td><td>0</td><td>28.6%</td></tr>
               <tr><td>2026.05.19</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0.0%</td></tr>
-              <tr><td>2026.05.18</td><td>8</td><td>2</td><td>6</td><td>0</td><td>75.0%</td></tr>
+              <tr><td>2026.05.18</td><td>3</td><td>2</td><td>1</td><td>0</td><td>33.3%</td></tr>
               <tr><td>2026.05.17</td><td>5</td><td>5</td><td>0</td><td>0</td><td>0.0%</td></tr>
               <tr><td>2026.05.16</td><td>2</td><td>2</td><td>0</td><td>0</td><td>0.0%</td></tr>
               <tr><td>2026.05.14</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0.0%</td></tr>
@@ -762,33 +771,33 @@
         <div class="inline-kpis demographic-summary">
           <div class="metric">
           <div class="metric-name">전체 회원</div>
-          <div class="metric-value">95</div>
-          <div class="metric-note">users 전체</div>
+          <div class="metric-value">117</div>
+          <div class="metric-note">현재 활동 가능</div>
         </div>
           <div class="metric">
           <div class="metric-name">남성 회원</div>
-          <div class="metric-value">75</div>
-          <div class="metric-note">78.9% of users</div>
+          <div class="metric-value">106</div>
+          <div class="metric-note">90.6% of active users</div>
         </div>
           <div class="metric">
           <div class="metric-name">여성 회원</div>
-          <div class="metric-value">20</div>
-          <div class="metric-note">21.1% of users</div>
+          <div class="metric-value">11</div>
+          <div class="metric-note">9.4% of active users</div>
         </div>
           <div class="metric">
           <div class="metric-name">전체 탈퇴</div>
-          <div class="metric-value">16</div>
-          <div class="metric-note">16.8% of users</div>
+          <div class="metric-value">18</div>
+          <div class="metric-note">누적 실제 가입 135명 중 탈퇴</div>
         </div>
           <div class="metric">
           <div class="metric-name">남성 탈퇴</div>
-          <div class="metric-value">12</div>
-          <div class="metric-note">75.0% of deletions</div>
+          <div class="metric-value">14</div>
+          <div class="metric-note">77.8% of deletions</div>
         </div>
           <div class="metric">
           <div class="metric-name">여성 탈퇴</div>
           <div class="metric-value">4</div>
-          <div class="metric-note">25.0% of deletions</div>
+          <div class="metric-note">22.2% of deletions</div>
         </div>
         </div>
         <div class="two-col">
@@ -818,101 +827,101 @@
         </div>
         <div class="funnel-grid">
           <div class="funnel-card" style="--funnel-color:#4f64c8">
-            <div class="funnel-title">남성<span>합계 348</span></div>
+            <div class="funnel-title">남성<span>합계 598</span></div>
             <div class="funnel-rows">
-              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:39.7%;"></div></div><span class="funnel-value">75</span></div>
-              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:6.3%;"></div></div><span class="funnel-value">12</span></div>
-              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:33.9%;"></div></div><span class="funnel-value">64</span></div>
-              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">189</span></div>
-              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:3.2%;"></div></div><span class="funnel-value">6</span></div>
+              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:35.3%;"></div></div><span class="funnel-value">120</span></div>
+              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:4.1%;"></div></div><span class="funnel-value">14</span></div>
+              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:34.7%;"></div></div><span class="funnel-value">118</span></div>
+              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">340</span></div>
+              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:2.0%;"></div></div><span class="funnel-value">4</span></div>
               <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:2.0%;"></div></div><span class="funnel-value">2</span></div>
             </div>
           </div>
           <div class="funnel-card" style="--funnel-color:#e94f64">
-            <div class="funnel-title">여성<span>합계 146</span></div>
+            <div class="funnel-title">여성<span>합계 180</span></div>
             <div class="funnel-rows">
-              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:19.2%;"></div></div><span class="funnel-value">20</span></div>
-              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:3.8%;"></div></div><span class="funnel-value">4</span></div>
-              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:9.6%;"></div></div><span class="funnel-value">10</span></div>
-              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">104</span></div>
-              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:3.8%;"></div></div><span class="funnel-value">4</span></div>
-              <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:3.8%;"></div></div><span class="funnel-value">4</span></div>
+              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:10.8%;"></div></div><span class="funnel-value">15</span></div>
+              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:2.9%;"></div></div><span class="funnel-value">4</span></div>
+              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:9.4%;"></div></div><span class="funnel-value">13</span></div>
+              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">139</span></div>
+              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:3.6%;"></div></div><span class="funnel-value">5</span></div>
+              <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:2.9%;"></div></div><span class="funnel-value">4</span></div>
             </div>
           </div>
         </div>
         <div class="funnel-grid age">
           <div class="funnel-card" style="--funnel-color:#9aa1a6">
-            <div class="funnel-title">10대<span>합계 2</span></div>
+            <div class="funnel-title">10대<span>합계 14</span></div>
             <div class="funnel-rows">
-              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">1</span></div>
-              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:0.0%;"></div></div><span class="funnel-value">0</span></div>
-              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">1</span></div>
-              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:0.0%;"></div></div><span class="funnel-value">0</span></div>
+              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:42.9%;"></div></div><span class="funnel-value">3</span></div>
+              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:14.3%;"></div></div><span class="funnel-value">1</span></div>
+              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:42.9%;"></div></div><span class="funnel-value">3</span></div>
+              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">7</span></div>
               <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:0.0%;"></div></div><span class="funnel-value">0</span></div>
               <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:0.0%;"></div></div><span class="funnel-value">0</span></div>
             </div>
           </div>
           <div class="funnel-card" style="--funnel-color:#4f64c8">
-            <div class="funnel-title">20-24<span>합계 102</span></div>
+            <div class="funnel-title">20-24<span>합계 107</span></div>
             <div class="funnel-rows">
-              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:51.0%;"></div></div><span class="funnel-value">25</span></div>
-              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:14.3%;"></div></div><span class="funnel-value">7</span></div>
-              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:40.8%;"></div></div><span class="funnel-value">20</span></div>
-              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">49</span></div>
-              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:2.0%;"></div></div><span class="funnel-value">1</span></div>
+              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:56.3%;"></div></div><span class="funnel-value">27</span></div>
+              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:12.5%;"></div></div><span class="funnel-value">6</span></div>
+              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:54.2%;"></div></div><span class="funnel-value">26</span></div>
+              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">48</span></div>
+              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:0.0%;"></div></div><span class="funnel-value">0</span></div>
               <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:0.0%;"></div></div><span class="funnel-value">0</span></div>
             </div>
           </div>
           <div class="funnel-card" style="--funnel-color:#2f7f82">
-            <div class="funnel-title">25-29<span>합계 173</span></div>
+            <div class="funnel-title">25-29<span>합계 227</span></div>
             <div class="funnel-rows">
-              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:29.0%;"></div></div><span class="funnel-value">31</span></div>
-              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:2.8%;"></div></div><span class="funnel-value">3</span></div>
-              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:20.6%;"></div></div><span class="funnel-value">22</span></div>
-              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">107</span></div>
-              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:5.6%;"></div></div><span class="funnel-value">6</span></div>
-              <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:3.7%;"></div></div><span class="funnel-value">4</span></div>
+              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:24.8%;"></div></div><span class="funnel-value">36</span></div>
+              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:2.1%;"></div></div><span class="funnel-value">3</span></div>
+              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:23.4%;"></div></div><span class="funnel-value">34</span></div>
+              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">145</span></div>
+              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:3.4%;"></div></div><span class="funnel-value">5</span></div>
+              <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:2.8%;"></div></div><span class="funnel-value">4</span></div>
             </div>
           </div>
           <div class="funnel-card" style="--funnel-color:#e94f64">
-            <div class="funnel-title">30-34<span>합계 110</span></div>
+            <div class="funnel-title">30-34<span>합계 181</span></div>
             <div class="funnel-rows">
-              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:21.8%;"></div></div><span class="funnel-value">17</span></div>
-              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:3.8%;"></div></div><span class="funnel-value">3</span></div>
-              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:12.8%;"></div></div><span class="funnel-value">10</span></div>
-              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">78</span></div>
-              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:2.6%;"></div></div><span class="funnel-value">2</span></div>
+              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:12.9%;"></div></div><span class="funnel-value">18</span></div>
+              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:2.1%;"></div></div><span class="funnel-value">3</span></div>
+              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:12.1%;"></div></div><span class="funnel-value">17</span></div>
+              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">140</span></div>
+              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:2.1%;"></div></div><span class="funnel-value">3</span></div>
               <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:0.0%;"></div></div><span class="funnel-value">0</span></div>
             </div>
           </div>
           <div class="funnel-card" style="--funnel-color:#d58c2a">
-            <div class="funnel-title">35-39<span>합계 53</span></div>
+            <div class="funnel-title">35-39<span>합계 67</span></div>
             <div class="funnel-rows">
-              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:28.1%;"></div></div><span class="funnel-value">9</span></div>
-              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:9.4%;"></div></div><span class="funnel-value">3</span></div>
-              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:28.1%;"></div></div><span class="funnel-value">9</span></div>
-              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">32</span></div>
+              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:30.0%;"></div></div><span class="funnel-value">12</span></div>
+              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:7.5%;"></div></div><span class="funnel-value">3</span></div>
+              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:30.0%;"></div></div><span class="funnel-value">12</span></div>
+              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">40</span></div>
               <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:0.0%;"></div></div><span class="funnel-value">0</span></div>
               <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:0.0%;"></div></div><span class="funnel-value">0</span></div>
             </div>
           </div>
           <div class="funnel-card" style="--funnel-color:#7c5cc4">
-            <div class="funnel-title">40+<span>합계 54</span></div>
+            <div class="funnel-title">40+<span>합계 182</span></div>
             <div class="funnel-rows">
-              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:44.4%;"></div></div><span class="funnel-value">12</span></div>
-              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:0.0%;"></div></div><span class="funnel-value">0</span></div>
-              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:44.4%;"></div></div><span class="funnel-value">12</span></div>
-              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">27</span></div>
-              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:3.7%;"></div></div><span class="funnel-value">1</span></div>
-              <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:7.4%;"></div></div><span class="funnel-value">2</span></div>
+              <div class="funnel-row"><span>회원가입</span><div class="funnel-track"><div class="funnel-fill" style="width:39.4%;"></div></div><span class="funnel-value">39</span></div>
+              <div class="funnel-row"><span>회원탈퇴</span><div class="funnel-track"><div class="funnel-fill" style="width:2.0%;"></div></div><span class="funnel-value">2</span></div>
+              <div class="funnel-row"><span>승인 회원</span><div class="funnel-track"><div class="funnel-fill" style="width:39.4%;"></div></div><span class="funnel-value">39</span></div>
+              <div class="funnel-row"><span>좋아요</span><div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div><span class="funnel-value">99</span></div>
+              <div class="funnel-row"><span>매칭</span><div class="funnel-track"><div class="funnel-fill" style="width:2.0%;"></div></div><span class="funnel-value">1</span></div>
+              <div class="funnel-row"><span>구매</span><div class="funnel-track"><div class="funnel-fill" style="width:2.0%;"></div></div><span class="funnel-value">2</span></div>
             </div>
           </div>
         </div>
         <div class="insights">
-          <div class="insight">가입 성비는 남성 75명, 여성 20명으로 여성 비율은 21.1%입니다.</div>
-          <div class="insight">승인 회원은 남성 64명, 여성 10명입니다. 여성 가입 후 승인 전환 흐름을 별도로 점검할 필요가 있습니다.</div>
-          <div class="insight">탈퇴는 남성 12명, 여성 4명이며, 가장 많이 이탈한 연령대는 20-24 7명입니다.</div>
-          <div class="insight">가입은 25-29가 가장 많고, 좋아요 활동은 25-29가 가장 큽니다.</div>
+          <div class="insight">가입 성비는 남성 120명, 여성 15명으로 여성 비율은 11.1%입니다.</div>
+          <div class="insight">승인 회원은 남성 118명, 여성 13명입니다. 여성 가입 후 승인 전환 흐름을 별도로 점검할 필요가 있습니다.</div>
+          <div class="insight">탈퇴는 남성 14명, 여성 4명이며, 가장 많이 이탈한 연령대는 20-24 6명입니다.</div>
+          <div class="insight">가입은 40+가 가장 많고, 좋아요 활동은 25-29가 가장 큽니다.</div>
           <div class="insight">구매는 남성 2건, 여성 4건으로 아직 표본이 작아 추세 관찰이 필요합니다.</div>
         </div>
         <div class="two-col">
@@ -921,11 +930,11 @@
               <tr><th>지표</th><th>남성</th><th>여성</th><th>미상</th><th>여성 비율</th></tr>
             </thead>
             <tbody>
-              <tr><td>회원가입</td><td>75</td><td>20</td><td>0</td><td>21.1%</td></tr>
-              <tr><td>회원탈퇴</td><td>12</td><td>4</td><td>0</td><td>25.0%</td></tr>
-              <tr><td>승인 회원</td><td>64</td><td>10</td><td>0</td><td>13.5%</td></tr>
-              <tr><td>좋아요</td><td>189</td><td>104</td><td>0</td><td>35.5%</td></tr>
-              <tr><td>매칭</td><td>6</td><td>4</td><td>0</td><td>40.0%</td></tr>
+              <tr><td>회원가입</td><td>120</td><td>15</td><td>0</td><td>11.1%</td></tr>
+              <tr><td>회원탈퇴</td><td>14</td><td>4</td><td>0</td><td>22.2%</td></tr>
+              <tr><td>승인 회원</td><td>118</td><td>13</td><td>0</td><td>9.9%</td></tr>
+              <tr><td>좋아요</td><td>340</td><td>139</td><td>0</td><td>29.0%</td></tr>
+              <tr><td>매칭</td><td>4</td><td>5</td><td>0</td><td>55.6%</td></tr>
               <tr><td>구매</td><td>2</td><td>4</td><td>0</td><td>66.7%</td></tr>
             </tbody>
           </table>
@@ -934,11 +943,11 @@
               <tr><th>지표</th><th>10대</th><th>20-24</th><th>25-29</th><th>30-34</th><th>35-39</th><th>40+</th><th>미상</th></tr>
             </thead>
             <tbody>
-              <tr><td>회원가입</td><td>1</td><td>25</td><td>31</td><td>17</td><td>9</td><td>12</td><td>0</td></tr>
-              <tr><td>회원탈퇴</td><td>0</td><td>7</td><td>3</td><td>3</td><td>3</td><td>0</td><td>0</td></tr>
-              <tr><td>승인 회원</td><td>1</td><td>20</td><td>22</td><td>10</td><td>9</td><td>12</td><td>0</td></tr>
-              <tr><td>좋아요</td><td>0</td><td>49</td><td>107</td><td>78</td><td>32</td><td>27</td><td>0</td></tr>
-              <tr><td>매칭</td><td>0</td><td>1</td><td>6</td><td>2</td><td>0</td><td>1</td><td>0</td></tr>
+              <tr><td>회원가입</td><td>3</td><td>27</td><td>36</td><td>18</td><td>12</td><td>39</td><td>0</td></tr>
+              <tr><td>회원탈퇴</td><td>1</td><td>6</td><td>3</td><td>3</td><td>3</td><td>2</td><td>0</td></tr>
+              <tr><td>승인 회원</td><td>3</td><td>26</td><td>34</td><td>17</td><td>12</td><td>39</td><td>0</td></tr>
+              <tr><td>좋아요</td><td>7</td><td>48</td><td>145</td><td>140</td><td>40</td><td>99</td><td>0</td></tr>
+              <tr><td>매칭</td><td>0</td><td>0</td><td>5</td><td>3</td><td>0</td><td>1</td><td>0</td></tr>
               <tr><td>구매</td><td>0</td><td>0</td><td>4</td><td>0</td><td>0</td><td>2</td><td>0</td></tr>
             </tbody>
           </table>
@@ -956,43 +965,39 @@
         <div class="inline-kpis">
           <div class="metric">
           <div class="metric-name">탈퇴 회원</div>
-          <div class="metric-value">16</div>
+          <div class="metric-value">18</div>
           <div class="metric-note">is_deleted 또는 deleted_at 기준</div>
         </div>
           <div class="metric">
           <div class="metric-name">사유 유형</div>
-          <div class="metric-value">6</div>
+          <div class="metric-value">4</div>
           <div class="metric-note">deletion_reason_type 그룹</div>
         </div>
           <div class="metric">
           <div class="metric-name">상세 사유 입력</div>
-          <div class="metric-value">15</div>
+          <div class="metric-value">18</div>
           <div class="metric-note">detail 텍스트 존재 건수</div>
         </div>
           <div class="metric">
           <div class="metric-name">탈퇴율</div>
-          <div class="metric-value">16.8%</div>
-          <div class="metric-note">탈퇴 회원 / users</div>
+          <div class="metric-value">13.3%</div>
+          <div class="metric-note">탈퇴 회원 / 누적 실제 가입</div>
         </div>
         </div>
         <div class="reason-bars">
-          <div class="reason-row"><span>기타</span><div class="reason-track"><div class="reason-fill" style="width:100.0%;"></div></div><span class="reason-value">6</span></div>
-          <div class="reason-row"><span>더 이상 필요 없음</span><div class="reason-track"><div class="reason-fill" style="width:50.0%;"></div></div><span class="reason-value">3</span></div>
-          <div class="reason-row"><span>사용 경험 불만</span><div class="reason-track"><div class="reason-fill" style="width:50.0%;"></div></div><span class="reason-value">3</span></div>
-          <div class="reason-row"><span>관리자 차단</span><div class="reason-track"><div class="reason-fill" style="width:33.3%;"></div></div><span class="reason-value">2</span></div>
-          <div class="reason-row"><span>관리자 신고 처리</span><div class="reason-track"><div class="reason-fill" style="width:16.7%;"></div></div><span class="reason-value">1</span></div>
-          <div class="reason-row"><span>상대 찾음</span><div class="reason-track"><div class="reason-fill" style="width:16.7%;"></div></div><span class="reason-value">1</span></div>
+          <div class="reason-row"><span>기타</span><div class="reason-track"><div class="reason-fill" style="width:100.0%;"></div></div><span class="reason-value">10</span></div>
+          <div class="reason-row"><span>사용 경험 불만</span><div class="reason-track"><div class="reason-fill" style="width:40.0%;"></div></div><span class="reason-value">4</span></div>
+          <div class="reason-row"><span>더 이상 필요 없음</span><div class="reason-track"><div class="reason-fill" style="width:30.0%;"></div></div><span class="reason-value">3</span></div>
+          <div class="reason-row"><span>상대 찾음</span><div class="reason-track"><div class="reason-fill" style="width:10.0%;"></div></div><span class="reason-value">1</span></div>
         </div>
         <table>
           <thead>
             <tr><th>탈퇴 사유 유형</th><th>탈퇴 수</th><th>상세 사유 입력</th></tr>
           </thead>
           <tbody>
-            <tr><td>기타</td><td>6</td><td>6</td></tr>
+            <tr><td>기타</td><td>10</td><td>10</td></tr>
+            <tr><td>사용 경험 불만</td><td>4</td><td>4</td></tr>
             <tr><td>더 이상 필요 없음</td><td>3</td><td>3</td></tr>
-            <tr><td>사용 경험 불만</td><td>3</td><td>3</td></tr>
-            <tr><td>관리자 차단</td><td>2</td><td>2</td></tr>
-            <tr><td>관리자 신고 처리</td><td>1</td><td>0</td></tr>
             <tr><td>상대 찾음</td><td>1</td><td>1</td></tr>
           </tbody>
         </table>
@@ -1002,8 +1007,8 @@
               <tr><th>성별</th><th>탈퇴 수</th><th>비율</th></tr>
             </thead>
             <tbody>
-              <tr><td>남성</td><td>12</td><td>75.0%</td></tr>
-              <tr><td>여성</td><td>4</td><td>25.0%</td></tr>
+              <tr><td>남성</td><td>14</td><td>77.8%</td></tr>
+              <tr><td>여성</td><td>4</td><td>22.2%</td></tr>
               <tr><td>미상</td><td>0</td><td>0.0%</td></tr>
             </tbody>
           </table>
@@ -1012,12 +1017,12 @@
               <tr><th>연령대</th><th>탈퇴 수</th><th>비율</th></tr>
             </thead>
             <tbody>
-              <tr><td>10대</td><td>0</td><td>0.0%</td></tr>
-              <tr><td>20-24</td><td>7</td><td>43.8%</td></tr>
-              <tr><td>25-29</td><td>3</td><td>18.8%</td></tr>
-              <tr><td>30-34</td><td>3</td><td>18.8%</td></tr>
-              <tr><td>35-39</td><td>3</td><td>18.8%</td></tr>
-              <tr><td>40+</td><td>0</td><td>0.0%</td></tr>
+              <tr><td>10대</td><td>1</td><td>5.6%</td></tr>
+              <tr><td>20-24</td><td>6</td><td>33.3%</td></tr>
+              <tr><td>25-29</td><td>3</td><td>16.7%</td></tr>
+              <tr><td>30-34</td><td>3</td><td>16.7%</td></tr>
+              <tr><td>35-39</td><td>3</td><td>16.7%</td></tr>
+              <tr><td>40+</td><td>2</td><td>11.1%</td></tr>
               <tr><td>미상</td><td>0</td><td>0.0%</td></tr>
             </tbody>
           </table>
@@ -1046,17 +1051,17 @@
         <div class="inline-kpis">
           <div class="metric">
           <div class="metric-name">하트 거래</div>
-          <div class="metric-value">322</div>
+          <div class="metric-value">384</div>
           <div class="metric-note">hearts_transactions row count</div>
         </div>
           <div class="metric">
           <div class="metric-name">메시지</div>
-          <div class="metric-value">12</div>
+          <div class="metric-value">19</div>
           <div class="metric-note">messages row count</div>
         </div>
           <div class="metric">
           <div class="metric-name">하트 증감</div>
-          <div class="metric-value">10,826</div>
+          <div class="metric-value">21,065</div>
           <div class="metric-note">amount 합계</div>
         </div>
           <div class="metric">
@@ -1081,20 +1086,20 @@
               <tr><th>날짜</th><th>하트거래</th><th>메시지</th><th>하트증감</th><th>구매건수</th><th>결제금액</th><th>신고</th></tr>
             </thead>
             <tbody>
-              <tr><td>2026.05.26</td><td>5</td><td>2</td><td>17</td><td>0</td><td>0원</td><td>0</td></tr>
+              <tr><td>2026.05.31</td><td>21</td><td>0</td><td>91</td><td>0</td><td>0원</td><td>0</td></tr>
+              <tr><td>2026.05.30</td><td>9</td><td>0</td><td>14</td><td>0</td><td>0원</td><td>0</td></tr>
+              <tr><td>2026.05.29</td><td>7</td><td>0</td><td>28</td><td>0</td><td>0원</td><td>0</td></tr>
+              <tr><td>2026.05.28</td><td>10</td><td>0</td><td>14</td><td>0</td><td>0원</td><td>0</td></tr>
+              <tr><td>2026.05.27</td><td>10</td><td>7</td><td>95</td><td>0</td><td>0원</td><td>0</td></tr>
+              <tr><td>2026.05.26</td><td>5</td><td>2</td><td>10,011</td><td>0</td><td>0원</td><td>0</td></tr>
               <tr><td>2026.05.25</td><td>6</td><td>1</td><td>3</td><td>0</td><td>0원</td><td>1</td></tr>
               <tr><td>2026.05.24</td><td>1</td><td>1</td><td>5</td><td>0</td><td>0원</td><td>0</td></tr>
               <tr><td>2026.05.23</td><td>4</td><td>0</td><td>13</td><td>0</td><td>0원</td><td>0</td></tr>
-              <tr><td>2026.05.22</td><td>10</td><td>0</td><td>9</td><td>0</td><td>0원</td><td>0</td></tr>
+              <tr><td>2026.05.22</td><td>8</td><td>0</td><td>12</td><td>0</td><td>0원</td><td>0</td></tr>
               <tr><td>2026.05.21</td><td>16</td><td>0</td><td>6</td><td>0</td><td>0원</td><td>0</td></tr>
               <tr><td>2026.05.20</td><td>7</td><td>0</td><td>108</td><td>0</td><td>0원</td><td>0</td></tr>
               <tr><td>2026.05.19</td><td>3</td><td>1</td><td>-4</td><td>0</td><td>0원</td><td>0</td></tr>
               <tr><td>2026.05.18</td><td>2</td><td>0</td><td>10</td><td>0</td><td>0원</td><td>0</td></tr>
-              <tr><td>2026.05.17</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0원</td><td>0</td></tr>
-              <tr><td>2026.05.16</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0원</td><td>0</td></tr>
-              <tr><td>2026.05.15</td><td>2</td><td>0</td><td>-2</td><td>0</td><td>0원</td><td>0</td></tr>
-              <tr><td>2026.05.14</td><td>1</td><td>0</td><td>-2</td><td>0</td><td>0원</td><td>0</td></tr>
-              <tr><td>2026.05.13</td><td>5</td><td>1</td><td>979</td><td>0</td><td>0원</td><td>0</td></tr>
             </tbody>
           </table>
         </div>
@@ -1111,40 +1116,40 @@
         <div class="inline-kpis">
           <div class="metric">
           <div class="metric-name">누적 광고비</div>
-          <div class="metric-value">168,861원</div>
+          <div class="metric-value">533,520원</div>
           <div class="metric-note">Meta + Google</div>
         </div>
           <div class="metric">
           <div class="metric-name">Meta 클릭</div>
-          <div class="metric-value">659</div>
-          <div class="metric-note">152원 CPC</div>
+          <div class="metric-value">1,177</div>
+          <div class="metric-note">222원 CPC</div>
         </div>
           <div class="metric">
           <div class="metric-name">Google 전환</div>
-          <div class="metric-value">21</div>
+          <div class="metric-value">83</div>
           <div class="metric-note">Google Ads 전환수</div>
         </div>
           <div class="metric">
           <div class="metric-name">Google 전환당 비용</div>
-          <div class="metric-value">3,278원</div>
+          <div class="metric-value">3,286원</div>
           <div class="metric-note">Google 비용 / 전환수</div>
         </div>
           <div class="metric">
           <div class="metric-name">동기간 가입</div>
-          <div class="metric-value">49</div>
+          <div class="metric-value">104</div>
           <div class="metric-note">앱 회원가입</div>
         </div>
           <div class="metric">
           <div class="metric-name">가입당 광고비</div>
-          <div class="metric-value">3,446원</div>
+          <div class="metric-value">5,130원</div>
           <div class="metric-note">총 광고비 / 앱 가입</div>
         </div>
         </div>
         <div class="notes">
-          <div class="note">클릭 규모 1위는 Instagram 게시물: &quot;너희 어떻게 만났어?&quot; 이 질문을 받을 때마다...이며 215클릭, CPC 114원입니다.</div>
-          <div class="note">비용 효율 1위는 Instagram 게시물: &quot;너희 어떻게 만났어?&quot; 이 질문을 받을 때마다...이며 CPC 114원입니다.</div>
-          <div class="note">반응률 1위는 Instagram 게시물: &quot;오늘 뭐 하지?&quot; &quot;몰라, 심심해.&quot; |&quot;만날...이며 CTR 6.4%입니다.</div>
-          <div class="note">Meta 반응 기준 최저 CPC는 남성 151원, 18-24 123원입니다.</div>
+          <div class="note">클릭 규모 1위는 Instagram 게시물: &quot;눈 오는 날, 누군가와 같이 걷고 싶다고 생각...이며 374클릭, CPC 108원입니다.</div>
+          <div class="note">비용 효율 1위는 Instagram 게시물: &quot;눈 오는 날, 누군가와 같이 걷고 싶다고 생각...이며 CPC 108원입니다.</div>
+          <div class="note">반응률 1위는 Instagram 게시물: &quot;오늘 뭐 하지?&quot; &quot;몰라, 심심해.&quot; |&quot;만날...이며 CTR 7.3%입니다.</div>
+          <div class="note">Meta 반응 기준 최저 CPC는 남성 205원, 18-24 153원입니다.</div>
           <div class="note">현재 파일에는 광고별 가입/결제 attribution이 없어 광고 효과 판단은 클릭, CPC, CTR과 같은 날짜의 앱 반응을 함께 보는 방식입니다.</div>
         </div>
       </section>
@@ -1191,9 +1196,9 @@
               <tr><th>Meta 성별 반응</th><th>광고비</th><th>클릭</th><th>CPC</th><th>노출</th></tr>
             </thead>
             <tbody>
-              <tr><td>남성</td><td>70,017원</td><td>465</td><td>151원</td><td>10,052</td></tr>
-              <tr><td>여성</td><td>29,622원</td><td>192</td><td>154원</td><td>4,740</td></tr>
-              <tr><td>미상</td><td>380원</td><td>2</td><td>190원</td><td>66</td></tr>
+              <tr><td>남성</td><td>176,023원</td><td>858</td><td>205원</td><td>36,190</td></tr>
+              <tr><td>여성</td><td>82,495원</td><td>314</td><td>263원</td><td>28,383</td></tr>
+              <tr><td>미상</td><td>2,238원</td><td>5</td><td>448원</td><td>792</td></tr>
             </tbody>
           </table>
           <table>
@@ -1201,12 +1206,12 @@
               <tr><th>Meta 연령대 반응</th><th>광고비</th><th>클릭</th><th>CPC</th><th>노출</th></tr>
             </thead>
             <tbody>
-              <tr><td>18-24</td><td>29,315원</td><td>238</td><td>123원</td><td>6,567</td></tr>
-              <tr><td>25-34</td><td>34,764원</td><td>217</td><td>160원</td><td>4,465</td></tr>
-              <tr><td>35-44</td><td>13,186원</td><td>70</td><td>188원</td><td>1,301</td></tr>
-              <tr><td>45-54</td><td>7,190원</td><td>50</td><td>144원</td><td>852</td></tr>
-              <tr><td>55-64</td><td>7,825원</td><td>51</td><td>153원</td><td>859</td></tr>
-              <tr><td>65+</td><td>7,739원</td><td>33</td><td>235원</td><td>814</td></tr>
+              <tr><td>18-24</td><td>63,154원</td><td>413</td><td>153원</td><td>15,770</td></tr>
+              <tr><td>25-34</td><td>89,814원</td><td>397</td><td>226원</td><td>19,374</td></tr>
+              <tr><td>35-44</td><td>51,503원</td><td>120</td><td>429원</td><td>15,260</td></tr>
+              <tr><td>45-54</td><td>20,892원</td><td>81</td><td>258원</td><td>6,734</td></tr>
+              <tr><td>55-64</td><td>18,733원</td><td>86</td><td>218원</td><td>4,812</td></tr>
+              <tr><td>65+</td><td>16,660원</td><td>80</td><td>208원</td><td>3,415</td></tr>
             </tbody>
           </table>
         </div>
@@ -1216,12 +1221,13 @@
               <tr><th>Meta 캠페인</th><th>광고비</th><th>클릭</th><th>CPC</th><th>CTR</th><th>노출</th><th>도달</th></tr>
             </thead>
             <tbody>
-              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;너희 어떻게 만났어?&quot; 이 질문을 받을 때마다 조금...</td><td>24,531원</td><td>215</td><td>114원</td><td>4.6%</td><td>4,695</td><td>4,456</td></tr>
-              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;눈 오는 날, 누군가와 같이 걷고 싶다고 생각해본 적...</td><td>25,266원</td><td>203</td><td>124원</td><td>3.6%</td><td>5,655</td><td>5,469</td></tr>
-              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;오늘 뭐 하지?&quot; &quot;몰라, 심심해.&quot; |&quot;만날 사람도...</td><td>13,498원</td><td>73</td><td>185원</td><td>6.4%</td><td>1,137</td><td>1,034</td></tr>
-              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: 나: 심심해 나: 진짜 심심해 나: 만날 사람 없나 나:...</td><td>13,332원</td><td>67</td><td>199원</td><td>5.9%</td><td>1,134</td><td>1,058</td></tr>
+              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;눈 오는 날, 누군가와 같이 걷고 싶다고 생각해본 적...</td><td>40,273원</td><td>374</td><td>108원</td><td>4.1%</td><td>9,179</td><td>8,904</td></tr>
+              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;너희 어떻게 만났어?&quot; 이 질문을 받을 때마다 조금...</td><td>39,359원</td><td>361</td><td>109원</td><td>4.6%</td><td>7,778</td><td>7,409</td></tr>
+              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;오늘 뭐 하지?&quot; &quot;몰라, 심심해.&quot; |&quot;만날 사람도...</td><td>29,040원</td><td>189</td><td>154원</td><td>7.3%</td><td>2,577</td><td>2,343</td></tr>
+              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: 나: 심심해 나: 진짜 심심해 나: 만날 사람 없나 나:...</td><td>28,740원</td><td>152</td><td>189원</td><td>5.7%</td><td>2,644</td><td>2,426</td></tr>
               <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: 나 매일 강남역으로 출근하는데 같은 시간, 같은 자리에서...</td><td>11,040원</td><td>51</td><td>216원</td><td>4.3%</td><td>1,199</td><td>1,153</td></tr>
               <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;우리 진작에 만났어야 했는데&quot; 5분 거리에 살면서 스쳐...</td><td>12,352원</td><td>50</td><td>247원</td><td>4.8%</td><td>1,038</td><td>975</td></tr>
+              <tr><td style="text-align:left; white-space:normal;">플러팅 앱 설치</td><td>99,952원</td><td>0</td><td>0원</td><td>0.0%</td><td>40,950</td><td>7,778</td></tr>
             </tbody>
           </table>
         </div>
@@ -1231,7 +1237,13 @@
               <tr><th>날짜</th><th>Meta 비용</th><th>Meta 클릭</th><th>Meta CPC</th><th>노출</th></tr>
             </thead>
             <tbody>
-              <tr><td>2026.05.25</td><td>10,849원</td><td>68</td><td>160원</td><td>1,572</td></tr>
+              <tr><td>2026.05.31</td><td>13,282원</td><td>135</td><td>98원</td><td>2,592</td></tr>
+              <tr><td>2026.05.30</td><td>5,388원</td><td>57</td><td>95원</td><td>1,022</td></tr>
+              <tr><td>2026.05.29</td><td>47,628원</td><td>88</td><td>541원</td><td>23,294</td></tr>
+              <tr><td>2026.05.28</td><td>72,645원</td><td>62</td><td>1,172원</td><td>20,468</td></tr>
+              <tr><td>2026.05.27</td><td>10,521원</td><td>86</td><td>122원</td><td>1,536</td></tr>
+              <tr><td>2026.05.26</td><td>11,268원</td><td>90</td><td>125원</td><td>1,594</td></tr>
+              <tr><td>2026.05.25</td><td>10,854원</td><td>68</td><td>160원</td><td>1,573</td></tr>
               <tr><td>2026.05.24</td><td>11,323원</td><td>80</td><td>142원</td><td>1,584</td></tr>
               <tr><td>2026.05.23</td><td>9,754원</td><td>59</td><td>165원</td><td>1,376</td></tr>
               <tr><td>2026.05.22</td><td>8,916원</td><td>62</td><td>144원</td><td>1,239</td></tr>
@@ -1282,6 +1294,10 @@
               <tr><th>날짜</th><th>Google 비용</th><th>Google 전환수</th><th>전환당 비용</th><th>노출</th></tr>
             </thead>
             <tbody>
+              <tr><td>2026.05.31</td><td>56,593원</td><td>22</td><td>2,572원</td><td>2,067</td></tr>
+              <tr><td>2026.05.30</td><td>51,149원</td><td>23</td><td>2,224원</td><td>2,009</td></tr>
+              <tr><td>2026.05.29</td><td>47,673원</td><td>11</td><td>4,334원</td><td>1,617</td></tr>
+              <tr><td>2026.05.28</td><td>48,507원</td><td>6</td><td>8,085원</td><td>1,464</td></tr>
               <tr><td>2026.05.25</td><td>1,400원</td><td>2</td><td>700원</td><td>137</td></tr>
               <tr><td>2026.05.24</td><td>2,828원</td><td>3</td><td>943원</td><td>152</td></tr>
               <tr><td>2026.05.23</td><td>1,570원</td><td>1</td><td>1,570원</td><td>179</td></tr>
@@ -1332,10 +1348,10 @@
           </div>
         </div>
         <div class="notes" style="margin-top:14px;">
-          <div class="note">Meta는 클릭 기준으로 659건, 평균 CPC 152원입니다.</div>
-          <div class="note">Google은 전환수 기준으로 21건, 전환당 비용 3,278원입니다.</div>
-          <div class="note">2026.05.22에 앱 가입이 11건으로 가장 많았습니다.</div>
-          <div class="note">가입당 광고비가 가장 낮은 날은 2026.05.18이며 401원입니다.</div>
+          <div class="note">Meta는 클릭 기준으로 1,177건, 평균 CPC 222원입니다.</div>
+          <div class="note">Google은 전환수 기준으로 83건, 전환당 비용 3,286원입니다.</div>
+          <div class="note">2026.05.31에 앱 가입이 20건으로 가장 많았습니다.</div>
+          <div class="note">가입당 광고비가 가장 낮은 날은 2026.05.18이며 1,068원입니다.</div>
         </div>
         <div class="number-table">
           <table>
@@ -1343,14 +1359,20 @@
               <tr><th>날짜</th><th>Meta 비용</th><th>Meta 클릭</th><th>Meta CPC</th><th>Google 비용</th><th>Google 전환수</th><th>Google 전환당 비용</th><th>회원가입</th><th>승인 회원</th><th>총 광고비</th><th>가입당 광고비</th></tr>
             </thead>
             <tbody>
-              <tr><td>2026.05.25</td><td>10,849원</td><td>68</td><td>160원</td><td>1,400원</td><td>2</td><td>700원</td><td>6</td><td>6</td><td>12,249원</td><td>2,042원</td></tr>
+              <tr><td>2026.05.31</td><td>13,282원</td><td>135</td><td>98원</td><td>56,593원</td><td>22</td><td>2,572원</td><td>20</td><td>20</td><td>69,875원</td><td>3,494원</td></tr>
+              <tr><td>2026.05.30</td><td>5,388원</td><td>57</td><td>95원</td><td>51,149원</td><td>23</td><td>2,224원</td><td>16</td><td>16</td><td>56,537원</td><td>3,534원</td></tr>
+              <tr><td>2026.05.29</td><td>47,628원</td><td>88</td><td>541원</td><td>47,673원</td><td>11</td><td>4,334원</td><td>6</td><td>6</td><td>95,301원</td><td>15,884원</td></tr>
+              <tr><td>2026.05.28</td><td>72,645원</td><td>62</td><td>1,172원</td><td>48,507원</td><td>6</td><td>8,085원</td><td>9</td><td>9</td><td>121,152원</td><td>13,461원</td></tr>
+              <tr><td>2026.05.27</td><td>10,521원</td><td>86</td><td>122원</td><td>0원</td><td>0</td><td>-</td><td>4</td><td>3</td><td>10,521원</td><td>2,630원</td></tr>
+              <tr><td>2026.05.26</td><td>11,268원</td><td>90</td><td>125원</td><td>0원</td><td>0</td><td>-</td><td>6</td><td>6</td><td>11,268원</td><td>1,878원</td></tr>
+              <tr><td>2026.05.25</td><td>10,854원</td><td>68</td><td>160원</td><td>1,400원</td><td>2</td><td>700원</td><td>6</td><td>6</td><td>12,254원</td><td>2,042원</td></tr>
               <tr><td>2026.05.24</td><td>11,323원</td><td>80</td><td>142원</td><td>2,828원</td><td>3</td><td>943원</td><td>2</td><td>2</td><td>14,151원</td><td>7,076원</td></tr>
               <tr><td>2026.05.23</td><td>9,754원</td><td>59</td><td>165원</td><td>1,570원</td><td>1</td><td>1,570원</td><td>2</td><td>2</td><td>11,324원</td><td>5,662원</td></tr>
-              <tr><td>2026.05.22</td><td>8,916원</td><td>62</td><td>144원</td><td>3,031원</td><td>3</td><td>1,010원</td><td>11</td><td>11</td><td>11,947원</td><td>1,086원</td></tr>
+              <tr><td>2026.05.22</td><td>8,916원</td><td>62</td><td>144원</td><td>3,031원</td><td>3</td><td>1,010원</td><td>10</td><td>10</td><td>11,947원</td><td>1,195원</td></tr>
               <tr><td>2026.05.21</td><td>11,228원</td><td>69</td><td>163원</td><td>2,868원</td><td>3</td><td>956원</td><td>5</td><td>5</td><td>14,096원</td><td>2,819원</td></tr>
               <tr><td>2026.05.20</td><td>8,638원</td><td>67</td><td>129원</td><td>6,484원</td><td>1</td><td>6,484원</td><td>7</td><td>5</td><td>15,122원</td><td>2,160원</td></tr>
               <tr><td>2026.05.19</td><td>10,562원</td><td>64</td><td>165원</td><td>5,348원</td><td>2</td><td>2,674원</td><td>0</td><td>0</td><td>15,910원</td><td>-</td></tr>
-              <tr><td>2026.05.18</td><td>3,205원</td><td>20</td><td>160원</td><td>0원</td><td>0</td><td>-</td><td>8</td><td>3</td><td>3,205원</td><td>401원</td></tr>
+              <tr><td>2026.05.18</td><td>3,205원</td><td>20</td><td>160원</td><td>0원</td><td>0</td><td>-</td><td>3</td><td>3</td><td>3,205원</td><td>1,068원</td></tr>
               <tr><td>2026.05.17</td><td>7,351원</td><td>55</td><td>134원</td><td>298원</td><td>1</td><td>298원</td><td>5</td><td>5</td><td>7,649원</td><td>1,530원</td></tr>
               <tr><td>2026.05.16</td><td>13,638원</td><td>89</td><td>153원</td><td>920원</td><td>1</td><td>920원</td><td>2</td><td>2</td><td>14,558원</td><td>7,279원</td></tr>
               <tr><td>2026.05.15</td><td>4,126원</td><td>22</td><td>188원</td><td>17,440원</td><td>2</td><td>8,720원</td><td>0</td><td>0</td><td>21,566원</td><td>-</td></tr>
@@ -1380,16 +1402,18 @@
             </thead>
             <tbody>
               <tr><td>Supabase tables</td><td>집계 완료</td><td>52</td></tr>
-              <tr><td>Total counted rows</td><td>집계 완료</td><td>13,728</td></tr>
-              <tr><td>Product signal rows</td><td>핵심 테이블 합산</td><td>3,442</td></tr>
+              <tr><td>Total counted rows</td><td>집계 완료</td><td>16,731</td></tr>
+              <tr><td>Product signal rows</td><td>핵심 테이블 합산</td><td>5,079</td></tr>
+              <tr><td>Excluded users</td><td>지표 제외</td><td>55</td></tr>
               <tr><td>Raw rows</td><td>미포함</td><td>0</td></tr>
             </tbody>
           </table>
           <div class="notes">
-            <div class="note">2026.05.19 가짜 가입 38명과 연결 승인 2건은 대시보드 지표에서 제외했습니다.</div>
+            <div class="note">관리자 생성/테스트 패턴 회원 55명은 회원가입, 탈퇴, 승인, 좋아요, 매칭 지표에서 제외했습니다.</div>
+            <div class="note">제외 기준: user_숫자@admin.created.local 53명, 2026.05.19 추가 가짜 회원 2명.</div>
+            <div class="note">2026.06.01 데이터는 당일 진행 중 데이터라 웹 표시에서 제외했습니다.</div>
             <div class="note">광고 효율은 2026.05.09 이후 Meta 일별 성별·연령 파일과 Google 일별 파일만 반영했습니다.</div>
-            <div class="note">Supabase aggregate export includes 52 table count rows and 13,728 total rows across counted tables.</div>
-            <div class="note">Daily product event aggregates include 269 date-metric rows.</div>
+            <div class="note">Supabase aggregate export includes 52 table count rows and 16,731 total rows across counted tables.</div>
           </div>
         </div>
       </section>
@@ -1579,20 +1603,20 @@
       });
     }
 
-    const dailyChart = buildBarChart("dailyCoreChart", ["2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26"], [{"backgroundColor":"#4f64c8","borderRadius":5,"data":[0,1,0,2,5,8,0,7,5,11,2,2,6,3],"label":"회원가입","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#5d6b70","borderRadius":5,"data":[0,0,0,0,0,2,0,0,0,1,2,1,2,2],"label":"회원탈퇴","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#2f7f82","borderRadius":5,"data":[0,1,0,2,5,3,0,5,5,11,2,2,6,2],"label":"승인 회원","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#e94f64","borderRadius":5,"data":[7,0,2,0,0,8,8,16,44,13,28,12,28,25],"label":"좋아요","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#d58c2a","borderRadius":5,"data":[3,0,0,0,0,0,0,0,1,0,0,0,0,1],"label":"매칭","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#7c5cc4","borderRadius":5,"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0],"label":"구매","maxBarThickness":18,"yAxisID":"count"}]);
+    const dailyChart = buildBarChart("dailyCoreChart", ["2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#4f64c8","borderRadius":5,"data":[3,0,7,5,10,2,2,6,6,4,9,6,16,20],"label":"회원가입","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#5d6b70","borderRadius":5,"data":[2,0,0,0,1,2,1,2,2,1,2,0,1,1],"label":"회원탈퇴","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#2f7f82","borderRadius":5,"data":[3,0,5,5,10,2,2,6,6,3,9,6,16,20],"label":"승인 회원","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#e94f64","borderRadius":5,"data":[8,8,12,40,11,28,12,28,33,34,33,24,27,74],"label":"좋아요","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#d58c2a","borderRadius":5,"data":[0,0,0,1,0,0,0,0,0,1,0,0,0,0],"label":"매칭","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#7c5cc4","borderRadius":5,"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0],"label":"구매","maxBarThickness":18,"yAxisID":"count"}]);
     bindMetricToggles("dailyMetricToggles", dailyChart);
-    buildDoughnutChart("signupGenderChart", ["남성","여성","미상"], [75,20,0], ["#4f64c8", "#e94f64", "#9aa1a6"]);
-    buildBarChart("signupAgeChart", ["10대","20-24","25-29","30-34","35-39","40+","미상"], [{"backgroundColor":"#2f7f82","borderRadius":5,"data":[1,25,31,17,9,12,0],"label":"가입자","maxBarThickness":22,"yAxisID":"count"}]);
-    const monetizationChart = buildBarChart("monetizationChart", ["2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26"], [{"backgroundColor":"#2f7f82","borderRadius":5,"data":[5,1,2,0,0,2,3,7,16,10,4,1,6,5],"label":"하트거래","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#4f64c8","borderRadius":5,"data":[1,0,0,0,0,0,1,0,0,0,0,1,1,2],"label":"메시지","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#7c5cc4","borderRadius":5,"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0],"label":"구매건수","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#e94f64","borderRadius":5,"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0],"label":"결제금액","maxBarThickness":18,"yAxisID":"amount"},{"backgroundColor":"#5d6b70","borderRadius":5,"data":[0,0,0,0,0,0,0,0,0,0,0,0,1,0],"label":"신고","maxBarThickness":18,"yAxisID":"count"}]);
+    buildDoughnutChart("signupGenderChart", ["남성","여성","미상"], [120,15,0], ["#4f64c8", "#e94f64", "#9aa1a6"]);
+    buildBarChart("signupAgeChart", ["10대","20-24","25-29","30-34","35-39","40+","미상"], [{"backgroundColor":"#2f7f82","borderRadius":5,"data":[3,27,36,18,12,39,0],"label":"가입자","maxBarThickness":22,"yAxisID":"count"}]);
+    const monetizationChart = buildBarChart("monetizationChart", ["2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#2f7f82","borderRadius":5,"data":[2,3,7,16,8,4,1,6,5,10,10,7,9,21],"label":"하트거래","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#4f64c8","borderRadius":5,"data":[0,1,0,0,0,0,1,1,2,7,0,0,0,0],"label":"메시지","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#7c5cc4","borderRadius":5,"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0],"label":"구매건수","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#e94f64","borderRadius":5,"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0],"label":"결제금액","maxBarThickness":18,"yAxisID":"amount"},{"backgroundColor":"#5d6b70","borderRadius":5,"data":[0,0,0,0,0,0,0,1,0,0,0,0,0,0],"label":"신고","maxBarThickness":18,"yAxisID":"count"}]);
     bindMetricToggles("monetizationMetricToggles", monetizationChart);
-    buildLineChart("metaTrendChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[0,0,0,0,0,429,4126,13638,7351,3205,10562,8638,11228,8916,9754,11323,10849],"label":"Meta 비용","yAxisID":"amount"},{"backgroundColor":"#5061b8","borderColor":"#5061b8","data":[0,0,0,0,0,4,22,89,55,20,64,67,69,62,59,80,68],"label":"Meta 클릭","yAxisID":"count"}]);
-    buildLineChart("googleCostChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[2517,2522,102,373,194,20947,17440,920,298,0,5348,6484,2868,3031,1570,2828,1400],"label":"Google 비용","yAxisID":"amount"}]);
-    buildLineChart("googleConversionChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25"], [{"backgroundColor":"#2f7f82","borderColor":"#2f7f82","data":[0,0,0,0,0,2,2,1,1,0,2,1,3,3,1,3,2],"label":"Google 전환수","yAxisID":"count"}]);
-    buildLineChart("googleCpaChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25"], [{"backgroundColor":"#5061b8","borderColor":"#5061b8","data":[0,0,0,0,0,10473.5,8720,920,298,0,2674,6484,956,1010.3333333333334,1570,942.6666666666666,700],"label":"Google 전환당 비용","yAxisID":"amount"}]);
-    buildLineChart("appResponseTrendChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25"], [{"backgroundColor":"#d58c2a","borderColor":"#d58c2a","data":[0,0,0,0,0,1,0,2,5,8,0,7,5,11,2,2,6],"label":"회원가입","yAxisID":"count"},{"backgroundColor":"#7c5cc4","borderColor":"#7c5cc4","data":[0,0,0,0,0,1,0,2,5,3,0,5,5,11,2,2,6],"label":"승인 회원","yAxisID":"count"}]);
-    buildLineChart("appCostPerSignupChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[0,0,0,0,0,21376,0,7279,1529.8,400.625,0,2160.285714285714,2819.2,1086.090909090909,5662,7075.5,2041.5],"label":"가입당 광고비","yAxisID":"amount"}]);
-    buildDoughnutChart("adGenderEffectChart", ["남성","여성","미상"], [465,192,2], ["#4f64c8", "#e94f64", "#9aa1a6"]);
-    buildBarChart("adAgeEffectChart", ["18-24","25-34","35-44","45-54","55-64","65+"], [{"backgroundColor":"#5061b8","borderRadius":5,"data":[123.17226890756302,160.20276497695852,188.37142857142857,143.8,153.4313725490196,234.5151515151515],"label":"CPC","maxBarThickness":24,"yAxisID":"amount"}]);
+    buildLineChart("metaTrendChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[0,0,0,0,0,429,4126,13638,7351,3205,10562,8638,11228,8916,9754,11323,10854,11268,10521,72645,47628,5388,13282],"label":"Meta 비용","yAxisID":"amount"},{"backgroundColor":"#5061b8","borderColor":"#5061b8","data":[0,0,0,0,0,4,22,89,55,20,64,67,69,62,59,80,68,90,86,62,88,57,135],"label":"Meta 클릭","yAxisID":"count"}]);
+    buildLineChart("googleCostChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[2517,2522,102,373,194,20947,17440,920,298,0,5348,6484,2868,3031,1570,2828,1400,0,0,48507,47673,51149,56593],"label":"Google 비용","yAxisID":"amount"}]);
+    buildLineChart("googleConversionChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#2f7f82","borderColor":"#2f7f82","data":[0,0,0,0,0,2,2,1,1,0,2,1,3,3,1,3,2,0,0,6,11,23,22],"label":"Google 전환수","yAxisID":"count"}]);
+    buildLineChart("googleCpaChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#5061b8","borderColor":"#5061b8","data":[0,0,0,0,0,10473.5,8720,920,298,0,2674,6484,956,1010.3333333333334,1570,942.6666666666666,700,0,0,8084.5,4333.909090909091,2223.8695652173915,2572.409090909091],"label":"Google 전환당 비용","yAxisID":"amount"}]);
+    buildLineChart("appResponseTrendChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#d58c2a","borderColor":"#d58c2a","data":[0,0,0,0,0,1,0,2,5,3,0,7,5,10,2,2,6,6,4,9,6,16,20],"label":"회원가입","yAxisID":"count"},{"backgroundColor":"#7c5cc4","borderColor":"#7c5cc4","data":[0,0,0,0,0,1,0,2,5,3,0,5,5,10,2,2,6,6,3,9,6,16,20],"label":"승인 회원","yAxisID":"count"}]);
+    buildLineChart("appCostPerSignupChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[0,0,0,0,0,21376,0,7279,1529.8,1068.3333333333333,0,2160.285714285714,2819.2,1194.7,5662,7075.5,2042.3333333333333,1878,2630.25,13461.333333333334,15883.5,3533.5625,3493.75],"label":"가입당 광고비","yAxisID":"amount"}]);
+    buildDoughnutChart("adGenderEffectChart", ["남성","여성","미상"], [858,314,5], ["#4f64c8", "#e94f64", "#9aa1a6"]);
+    buildBarChart("adAgeEffectChart", ["18-24","25-34","35-44","45-54","55-64","65+"], [{"backgroundColor":"#5061b8","borderRadius":5,"data":[152.91525423728814,226.23173803526447,429.19166666666666,257.9259259259259,217.82558139534885,208.25],"label":"CPC","maxBarThickness":24,"yAxisID":"amount"}]);
   </script>
 </body>
 </html>
