@@ -957,6 +957,87 @@
       <section class="section">
         <div class="section-head">
           <div>
+            <h2>최근 접속 분포</h2>
+            <p class="sub">관리자 생성/가짜 회원을 제외한 실제 회원의 last_seen 기준 분포입니다. 추이는 접속 로그가 아니라 각 회원의 현재 마지막 접속일 분포입니다.</p>
+          </div>
+          <div class="status">last_seen 기준</div>
+        </div>
+        <div class="inline-kpis demographic-summary">
+          <div class="metric">
+          <div class="metric-name">최근 24시간</div>
+          <div class="metric-value">30</div>
+          <div class="metric-note">남성 27 · 여성 3</div>
+        </div>
+          <div class="metric">
+          <div class="metric-name">최근 7일</div>
+          <div class="metric-value">79</div>
+          <div class="metric-note">남성 74 · 여성 5</div>
+        </div>
+          <div class="metric">
+          <div class="metric-name">최근 30일</div>
+          <div class="metric-value">112</div>
+          <div class="metric-note">남성 104 · 여성 8</div>
+        </div>
+        </div>
+        <div class="two-col">
+          <div>
+            <div class="legend">
+              <span><i style="--dot:#2f7f82"></i>전체</span>
+              <span><i style="--dot:#4f64c8"></i>남성</span>
+              <span><i style="--dot:#e94f64"></i>여성</span>
+            </div>
+            <div class="chart-shell">
+              <canvas id="recentLoginTrendChart" aria-label="최근 접속 날짜 분포 추이 차트"></canvas>
+            </div>
+          </div>
+          <div>
+            <div class="legend">
+              <span><i style="--dot:#9aa1a6"></i>10대</span>
+              <span><i style="--dot:#4f64c8"></i>20-24</span>
+              <span><i style="--dot:#2f7f82"></i>25-29</span>
+              <span><i style="--dot:#e94f64"></i>30-34</span>
+              <span><i style="--dot:#d58c2a"></i>35-39</span>
+              <span><i style="--dot:#7c5cc4"></i>40+</span>
+            </div>
+            <div class="chart-shell">
+              <canvas id="recentLoginAgeChart" aria-label="최근 7일 접속 연령대 분포 차트"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="two-col">
+          <table>
+            <thead>
+              <tr><th>구간</th><th>전체</th><th>남성</th><th>여성</th><th>여성 비율</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>최근 24시간</td><td>30</td><td>27</td><td>3</td><td>10.0%</td></tr>
+              <tr><td>최근 7일</td><td>79</td><td>74</td><td>5</td><td>6.3%</td></tr>
+              <tr><td>최근 30일</td><td>112</td><td>104</td><td>8</td><td>7.1%</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr><th>최근 7일 연령대</th><th>접속 회원</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>10대</td><td>2</td></tr>
+              <tr><td>20-24</td><td>8</td></tr>
+              <tr><td>25-29</td><td>17</td></tr>
+              <tr><td>30-34</td><td>14</td></tr>
+              <tr><td>35-39</td><td>6</td></tr>
+              <tr><td>40+</td><td>32</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="insights">
+          <div class="insight">최근 7일 접속은 79명이며, 여성은 5명입니다.</div>
+          <div class="insight">날짜별 추이는 이벤트 로그가 아니라 현재 last_seen의 최종 날짜 분포라, 재방문 추세를 정밀하게 보려면 별도 접속 로그 적재가 필요합니다.</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
             <h2>회원탈퇴 사유</h2>
             <p class="sub">users 테이블의 삭제 플래그와 탈퇴 사유 유형을 집계했습니다. 상세 사유 원문은 표시하지 않고 입력 건수만 표시합니다.</p>
           </div>
@@ -1116,22 +1197,22 @@
         <div class="inline-kpis">
           <div class="metric">
           <div class="metric-name">누적 광고비</div>
-          <div class="metric-value">533,520원</div>
+          <div class="metric-value">584,985원</div>
           <div class="metric-note">Meta + Google</div>
         </div>
           <div class="metric">
           <div class="metric-name">Meta 클릭</div>
-          <div class="metric-value">1,177</div>
-          <div class="metric-note">222원 CPC</div>
+          <div class="metric-value">1,255</div>
+          <div class="metric-note">214원 CPC</div>
         </div>
           <div class="metric">
           <div class="metric-name">Google 전환</div>
-          <div class="metric-value">83</div>
+          <div class="metric-value">102</div>
           <div class="metric-note">Google Ads 전환수</div>
         </div>
           <div class="metric">
           <div class="metric-name">Google 전환당 비용</div>
-          <div class="metric-value">3,286원</div>
+          <div class="metric-value">3,101원</div>
           <div class="metric-note">Google 비용 / 전환수</div>
         </div>
           <div class="metric">
@@ -1141,15 +1222,15 @@
         </div>
           <div class="metric">
           <div class="metric-name">가입당 광고비</div>
-          <div class="metric-value">5,130원</div>
+          <div class="metric-value">5,625원</div>
           <div class="metric-note">총 광고비 / 앱 가입</div>
         </div>
         </div>
         <div class="notes">
-          <div class="note">클릭 규모 1위는 Instagram 게시물: &quot;눈 오는 날, 누군가와 같이 걷고 싶다고 생각...이며 374클릭, CPC 108원입니다.</div>
-          <div class="note">비용 효율 1위는 Instagram 게시물: &quot;눈 오는 날, 누군가와 같이 걷고 싶다고 생각...이며 CPC 108원입니다.</div>
+          <div class="note">클릭 규모 1위는 Instagram 게시물: &quot;눈 오는 날, 누군가와 같이 걷고 싶다고 생각...이며 408클릭, CPC 103원입니다.</div>
+          <div class="note">비용 효율 1위는 Instagram 게시물: &quot;눈 오는 날, 누군가와 같이 걷고 싶다고 생각...이며 CPC 103원입니다.</div>
           <div class="note">반응률 1위는 Instagram 게시물: &quot;오늘 뭐 하지?&quot; &quot;몰라, 심심해.&quot; |&quot;만날...이며 CTR 7.3%입니다.</div>
-          <div class="note">Meta 반응 기준 최저 CPC는 남성 205원, 18-24 153원입니다.</div>
+          <div class="note">Meta 반응 기준 최저 CPC는 남성 200원, 18-24 145원입니다.</div>
           <div class="note">현재 파일에는 광고별 가입/결제 attribution이 없어 광고 효과 판단은 클릭, CPC, CTR과 같은 날짜의 앱 반응을 함께 보는 방식입니다.</div>
         </div>
       </section>
@@ -1196,9 +1277,9 @@
               <tr><th>Meta 성별 반응</th><th>광고비</th><th>클릭</th><th>CPC</th><th>노출</th></tr>
             </thead>
             <tbody>
-              <tr><td>남성</td><td>176,023원</td><td>858</td><td>205원</td><td>36,190</td></tr>
-              <tr><td>여성</td><td>82,495원</td><td>314</td><td>263원</td><td>28,383</td></tr>
-              <tr><td>미상</td><td>2,238원</td><td>5</td><td>448원</td><td>792</td></tr>
+              <tr><td>남성</td><td>182,667원</td><td>915</td><td>200원</td><td>37,224</td></tr>
+              <tr><td>여성</td><td>83,739원</td><td>335</td><td>250원</td><td>28,661</td></tr>
+              <tr><td>미상</td><td>2,266원</td><td>5</td><td>453원</td><td>802</td></tr>
             </tbody>
           </table>
           <table>
@@ -1206,12 +1287,12 @@
               <tr><th>Meta 연령대 반응</th><th>광고비</th><th>클릭</th><th>CPC</th><th>노출</th></tr>
             </thead>
             <tbody>
-              <tr><td>18-24</td><td>63,154원</td><td>413</td><td>153원</td><td>15,770</td></tr>
-              <tr><td>25-34</td><td>89,814원</td><td>397</td><td>226원</td><td>19,374</td></tr>
-              <tr><td>35-44</td><td>51,503원</td><td>120</td><td>429원</td><td>15,260</td></tr>
-              <tr><td>45-54</td><td>20,892원</td><td>81</td><td>258원</td><td>6,734</td></tr>
-              <tr><td>55-64</td><td>18,733원</td><td>86</td><td>218원</td><td>4,812</td></tr>
-              <tr><td>65+</td><td>16,660원</td><td>80</td><td>208원</td><td>3,415</td></tr>
+              <tr><td>18-24</td><td>65,422원</td><td>451</td><td>145원</td><td>16,335</td></tr>
+              <tr><td>25-34</td><td>91,950원</td><td>411</td><td>224원</td><td>19,709</td></tr>
+              <tr><td>35-44</td><td>52,169원</td><td>127</td><td>411원</td><td>15,346</td></tr>
+              <tr><td>45-54</td><td>21,714원</td><td>88</td><td>247원</td><td>6,826</td></tr>
+              <tr><td>55-64</td><td>19,473원</td><td>89</td><td>219원</td><td>4,913</td></tr>
+              <tr><td>65+</td><td>17,944원</td><td>89</td><td>202원</td><td>3,558</td></tr>
             </tbody>
           </table>
         </div>
@@ -1221,10 +1302,10 @@
               <tr><th>Meta 캠페인</th><th>광고비</th><th>클릭</th><th>CPC</th><th>CTR</th><th>노출</th><th>도달</th></tr>
             </thead>
             <tbody>
-              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;눈 오는 날, 누군가와 같이 걷고 싶다고 생각해본 적...</td><td>40,273원</td><td>374</td><td>108원</td><td>4.1%</td><td>9,179</td><td>8,904</td></tr>
-              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;너희 어떻게 만났어?&quot; 이 질문을 받을 때마다 조금...</td><td>39,359원</td><td>361</td><td>109원</td><td>4.6%</td><td>7,778</td><td>7,409</td></tr>
-              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;오늘 뭐 하지?&quot; &quot;몰라, 심심해.&quot; |&quot;만날 사람도...</td><td>29,040원</td><td>189</td><td>154원</td><td>7.3%</td><td>2,577</td><td>2,343</td></tr>
-              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: 나: 심심해 나: 진짜 심심해 나: 만날 사람 없나 나:...</td><td>28,740원</td><td>152</td><td>189원</td><td>5.7%</td><td>2,644</td><td>2,426</td></tr>
+              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;눈 오는 날, 누군가와 같이 걷고 싶다고 생각해본 적...</td><td>42,027원</td><td>408</td><td>103원</td><td>4.1%</td><td>9,839</td><td>9,557</td></tr>
+              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;너희 어떻게 만났어?&quot; 이 질문을 받을 때마다 조금...</td><td>41,014원</td><td>380</td><td>108원</td><td>4.7%</td><td>8,019</td><td>7,639</td></tr>
+              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;오늘 뭐 하지?&quot; &quot;몰라, 심심해.&quot; |&quot;만날 사람도...</td><td>31,237원</td><td>202</td><td>155원</td><td>7.3%</td><td>2,767</td><td>2,518</td></tr>
+              <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: 나: 심심해 나: 진짜 심심해 나: 만날 사람 없나 나:...</td><td>31,050원</td><td>164</td><td>189원</td><td>5.7%</td><td>2,875</td><td>2,636</td></tr>
               <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: 나 매일 강남역으로 출근하는데 같은 시간, 같은 자리에서...</td><td>11,040원</td><td>51</td><td>216원</td><td>4.3%</td><td>1,199</td><td>1,153</td></tr>
               <tr><td style="text-align:left; white-space:normal;">Instagram 게시물: &quot;우리 진작에 만났어야 했는데&quot; 5분 거리에 살면서 스쳐...</td><td>12,352원</td><td>50</td><td>247원</td><td>4.8%</td><td>1,038</td><td>975</td></tr>
               <tr><td style="text-align:left; white-space:normal;">플러팅 앱 설치</td><td>99,952원</td><td>0</td><td>0원</td><td>0.0%</td><td>40,950</td><td>7,778</td></tr>
@@ -1237,6 +1318,7 @@
               <tr><th>날짜</th><th>Meta 비용</th><th>Meta 클릭</th><th>Meta CPC</th><th>노출</th></tr>
             </thead>
             <tbody>
+              <tr><td>2026.06.01</td><td>7,916원</td><td>78</td><td>101원</td><td>1,322</td></tr>
               <tr><td>2026.05.31</td><td>13,282원</td><td>135</td><td>98원</td><td>2,592</td></tr>
               <tr><td>2026.05.30</td><td>5,388원</td><td>57</td><td>95원</td><td>1,022</td></tr>
               <tr><td>2026.05.29</td><td>47,628원</td><td>88</td><td>541원</td><td>23,294</td></tr>
@@ -1294,6 +1376,7 @@
               <tr><th>날짜</th><th>Google 비용</th><th>Google 전환수</th><th>전환당 비용</th><th>노출</th></tr>
             </thead>
             <tbody>
+              <tr><td>2026.06.01</td><td>43,549원</td><td>19</td><td>2,292원</td><td>2,033</td></tr>
               <tr><td>2026.05.31</td><td>56,593원</td><td>22</td><td>2,572원</td><td>2,067</td></tr>
               <tr><td>2026.05.30</td><td>51,149원</td><td>23</td><td>2,224원</td><td>2,009</td></tr>
               <tr><td>2026.05.29</td><td>47,673원</td><td>11</td><td>4,334원</td><td>1,617</td></tr>
@@ -1348,8 +1431,8 @@
           </div>
         </div>
         <div class="notes" style="margin-top:14px;">
-          <div class="note">Meta는 클릭 기준으로 1,177건, 평균 CPC 222원입니다.</div>
-          <div class="note">Google은 전환수 기준으로 83건, 전환당 비용 3,286원입니다.</div>
+          <div class="note">Meta는 클릭 기준으로 1,255건, 평균 CPC 214원입니다.</div>
+          <div class="note">Google은 전환수 기준으로 102건, 전환당 비용 3,101원입니다.</div>
           <div class="note">2026.05.31에 앱 가입이 20건으로 가장 많았습니다.</div>
           <div class="note">가입당 광고비가 가장 낮은 날은 2026.05.18이며 1,068원입니다.</div>
         </div>
@@ -1359,6 +1442,7 @@
               <tr><th>날짜</th><th>Meta 비용</th><th>Meta 클릭</th><th>Meta CPC</th><th>Google 비용</th><th>Google 전환수</th><th>Google 전환당 비용</th><th>회원가입</th><th>승인 회원</th><th>총 광고비</th><th>가입당 광고비</th></tr>
             </thead>
             <tbody>
+              <tr><td>2026.06.01</td><td>7,916원</td><td>78</td><td>101원</td><td>43,549원</td><td>19</td><td>2,292원</td><td>0</td><td>0</td><td>51,465원</td><td>-</td></tr>
               <tr><td>2026.05.31</td><td>13,282원</td><td>135</td><td>98원</td><td>56,593원</td><td>22</td><td>2,572원</td><td>20</td><td>20</td><td>69,875원</td><td>3,494원</td></tr>
               <tr><td>2026.05.30</td><td>5,388원</td><td>57</td><td>95원</td><td>51,149원</td><td>23</td><td>2,224원</td><td>16</td><td>16</td><td>56,537원</td><td>3,534원</td></tr>
               <tr><td>2026.05.29</td><td>47,628원</td><td>88</td><td>541원</td><td>47,673원</td><td>11</td><td>4,334원</td><td>6</td><td>6</td><td>95,301원</td><td>15,884원</td></tr>
@@ -1411,7 +1495,7 @@
           <div class="notes">
             <div class="note">관리자 생성/테스트 회원 56명은 회원가입, 탈퇴, 승인, 좋아요, 매칭 지표에서 제외했습니다.</div>
             <div class="note">제외 기준: onboarding_submissions.payload.created_by_admin=true 또는 Created by admin 54명, 2026.05.19 추가 가짜 회원 2명.</div>
-            <div class="note">2026.06.01 데이터는 당일 진행 중 데이터라 웹 표시에서 제외했습니다.</div>
+            <div class="note">운영 핵심지표의 2026.06.01 데이터는 당일 진행 중 데이터라 웹 표시에서 제외했습니다. 광고 및 최근 접속 분포는 최신 파일/DB 기준을 반영합니다.</div>
             <div class="note">광고 효율은 2026.05.09 이후 Meta 일별 성별·연령 파일과 Google 일별 파일만 반영했습니다.</div>
             <div class="note">Supabase aggregate export includes 52 table count rows and 16,731 total rows across counted tables.</div>
           </div>
@@ -1607,16 +1691,18 @@
     bindMetricToggles("dailyMetricToggles", dailyChart);
     buildDoughnutChart("signupGenderChart", ["남성","여성","미상"], [120,14,0], ["#4f64c8", "#e94f64", "#9aa1a6"]);
     buildBarChart("signupAgeChart", ["10대","20-24","25-29","30-34","35-39","40+","미상"], [{"backgroundColor":"#2f7f82","borderRadius":5,"data":[3,27,35,18,12,39,0],"label":"가입자","maxBarThickness":22,"yAxisID":"count"}]);
+    buildLineChart("recentLoginTrendChart", ["2026.05.11","2026.05.14","2026.05.16","2026.05.17","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31","2026.06.01","2026.06.02"], [{"backgroundColor":"#2f7f82","borderColor":"#2f7f82","data":[1,1,2,4,6,4,3,2,1,4,5,3,3,5,9,18,24,13],"label":"최근 접속 회원","yAxisID":"count"},{"backgroundColor":"#4f64c8","borderColor":"#4f64c8","data":[1,1,2,4,4,4,2,2,1,4,5,3,3,4,9,17,24,10],"label":"남성","yAxisID":"count"},{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[0,0,0,0,2,0,1,0,0,0,0,0,0,1,0,1,0,3],"label":"여성","yAxisID":"count"}]);
+    buildBarChart("recentLoginAgeChart", ["10대","20-24","25-29","30-34","35-39","40+"], [{"backgroundColor":"#2f7f82","borderRadius":5,"data":[2,8,17,14,6,32],"label":"최근 7일 접속","maxBarThickness":22,"yAxisID":"count"}]);
     const monetizationChart = buildBarChart("monetizationChart", ["2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#2f7f82","borderRadius":5,"data":[2,2,7,15,8,4,1,5,5,10,4,7,9,21],"label":"하트거래","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#4f64c8","borderRadius":5,"data":[0,1,0,0,0,0,1,1,2,7,0,0,0,0],"label":"메시지","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#7c5cc4","borderRadius":5,"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0],"label":"구매건수","maxBarThickness":18,"yAxisID":"count"},{"backgroundColor":"#e94f64","borderRadius":5,"data":[0,0,0,0,0,0,0,0,0,0,0,0,0,0],"label":"결제금액","maxBarThickness":18,"yAxisID":"amount"},{"backgroundColor":"#5d6b70","borderRadius":5,"data":[0,0,0,0,0,0,0,1,0,0,0,0,0,0],"label":"신고","maxBarThickness":18,"yAxisID":"count"}]);
     bindMetricToggles("monetizationMetricToggles", monetizationChart);
-    buildLineChart("metaTrendChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[0,0,0,0,0,429,4126,13638,7351,3205,10562,8638,11228,8916,9754,11323,10854,11268,10521,72645,47628,5388,13282],"label":"Meta 비용","yAxisID":"amount"},{"backgroundColor":"#5061b8","borderColor":"#5061b8","data":[0,0,0,0,0,4,22,89,55,20,64,67,69,62,59,80,68,90,86,62,88,57,135],"label":"Meta 클릭","yAxisID":"count"}]);
-    buildLineChart("googleCostChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[2517,2522,102,373,194,20947,17440,920,298,0,5348,6484,2868,3031,1570,2828,1400,0,0,48507,47673,51149,56593],"label":"Google 비용","yAxisID":"amount"}]);
-    buildLineChart("googleConversionChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#2f7f82","borderColor":"#2f7f82","data":[0,0,0,0,0,2,2,1,1,0,2,1,3,3,1,3,2,0,0,6,11,23,22],"label":"Google 전환수","yAxisID":"count"}]);
-    buildLineChart("googleCpaChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#5061b8","borderColor":"#5061b8","data":[0,0,0,0,0,10473.5,8720,920,298,0,2674,6484,956,1010.3333333333334,1570,942.6666666666666,700,0,0,8084.5,4333.909090909091,2223.8695652173915,2572.409090909091],"label":"Google 전환당 비용","yAxisID":"amount"}]);
-    buildLineChart("appResponseTrendChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#d58c2a","borderColor":"#d58c2a","data":[0,0,0,0,0,1,0,2,5,3,0,7,5,10,2,2,6,6,4,9,6,16,20],"label":"회원가입","yAxisID":"count"},{"backgroundColor":"#7c5cc4","borderColor":"#7c5cc4","data":[0,0,0,0,0,1,0,2,5,3,0,5,5,10,2,2,6,6,3,9,6,16,20],"label":"승인 회원","yAxisID":"count"}]);
-    buildLineChart("appCostPerSignupChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[0,0,0,0,0,21376,0,7279,1529.8,1068.3333333333333,0,2160.285714285714,2819.2,1194.7,5662,7075.5,2042.3333333333333,1878,2630.25,13461.333333333334,15883.5,3533.5625,3493.75],"label":"가입당 광고비","yAxisID":"amount"}]);
-    buildDoughnutChart("adGenderEffectChart", ["남성","여성","미상"], [858,314,5], ["#4f64c8", "#e94f64", "#9aa1a6"]);
-    buildBarChart("adAgeEffectChart", ["18-24","25-34","35-44","45-54","55-64","65+"], [{"backgroundColor":"#5061b8","borderRadius":5,"data":[152.91525423728814,226.23173803526447,429.19166666666666,257.9259259259259,217.82558139534885,208.25],"label":"CPC","maxBarThickness":24,"yAxisID":"amount"}]);
+    buildLineChart("metaTrendChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31","2026.06.01"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[0,0,0,0,0,429,4126,13638,7351,3205,10562,8638,11228,8916,9754,11323,10854,11268,10521,72645,47628,5388,13282,7916],"label":"Meta 비용","yAxisID":"amount"},{"backgroundColor":"#5061b8","borderColor":"#5061b8","data":[0,0,0,0,0,4,22,89,55,20,64,67,69,62,59,80,68,90,86,62,88,57,135,78],"label":"Meta 클릭","yAxisID":"count"}]);
+    buildLineChart("googleCostChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31","2026.06.01"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[2517,2522,102,373,194,20947,17440,920,298,0,5348,6484,2868,3031,1570,2828,1400,0,0,48507,47673,51149,56593,43549],"label":"Google 비용","yAxisID":"amount"}]);
+    buildLineChart("googleConversionChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31","2026.06.01"], [{"backgroundColor":"#2f7f82","borderColor":"#2f7f82","data":[0,0,0,0,0,2,2,1,1,0,2,1,3,3,1,3,2,0,0,6,11,23,22,19],"label":"Google 전환수","yAxisID":"count"}]);
+    buildLineChart("googleCpaChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31","2026.06.01"], [{"backgroundColor":"#5061b8","borderColor":"#5061b8","data":[0,0,0,0,0,10473.5,8720,920,298,0,2674,6484,956,1010.3333333333334,1570,942.6666666666666,700,0,0,8084.5,4333.909090909091,2223.8695652173915,2572.409090909091,2292.0526315789475],"label":"Google 전환당 비용","yAxisID":"amount"}]);
+    buildLineChart("appResponseTrendChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31","2026.06.01"], [{"backgroundColor":"#d58c2a","borderColor":"#d58c2a","data":[0,0,0,0,0,1,0,2,5,3,0,7,5,10,2,2,6,6,4,9,6,16,20,0],"label":"회원가입","yAxisID":"count"},{"backgroundColor":"#7c5cc4","borderColor":"#7c5cc4","data":[0,0,0,0,0,1,0,2,5,3,0,5,5,10,2,2,6,6,3,9,6,16,20,0],"label":"승인 회원","yAxisID":"count"}]);
+    buildLineChart("appCostPerSignupChart", ["2026.05.09","2026.05.10","2026.05.11","2026.05.12","2026.05.13","2026.05.14","2026.05.15","2026.05.16","2026.05.17","2026.05.18","2026.05.19","2026.05.20","2026.05.21","2026.05.22","2026.05.23","2026.05.24","2026.05.25","2026.05.26","2026.05.27","2026.05.28","2026.05.29","2026.05.30","2026.05.31","2026.06.01"], [{"backgroundColor":"#e94f64","borderColor":"#e94f64","data":[0,0,0,0,0,21376,0,7279,1529.8,1068.3333333333333,0,2160.285714285714,2819.2,1194.7,5662,7075.5,2042.3333333333333,1878,2630.25,13461.333333333334,15883.5,3533.5625,3493.75,0],"label":"가입당 광고비","yAxisID":"amount"}]);
+    buildDoughnutChart("adGenderEffectChart", ["남성","여성","미상"], [915,335,5], ["#4f64c8", "#e94f64", "#9aa1a6"]);
+    buildBarChart("adAgeEffectChart", ["18-24","25-34","35-44","45-54","55-64","65+"], [{"backgroundColor":"#5061b8","borderRadius":5,"data":[145.059866962306,223.72262773722628,410.7795275590551,246.75,218.79775280898878,201.61797752808988],"label":"CPC","maxBarThickness":24,"yAxisID":"amount"}]);
   </script>
 </body>
 </html>
