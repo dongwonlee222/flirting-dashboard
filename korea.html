@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>플러팅 한국 운영 대시보드</title>
+  <script src="chart.umd.js"></script>
+  <style>
+
+    :root {
+      --ink:#182126;
+      --muted:#66747b;
+      --line:#dfe6e7;
+      --paper:#ffffff;
+      --panel:#fffdfa;
+      --bg:#f6f8f6;
+      --accent:#e94f64;
+      --accent-2:#2f7f82;
+      --accent-3:#4f64c8;
+      --accent-4:#d58c2a;
+      --accent-5:#7c5cc4;
+      --soft:#fff7ed;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.5;
+    }
+    .hero {
+      color:#fff;
+      background:
+        linear-gradient(90deg, rgba(24,33,38,.58), rgba(24,33,38,.10)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 520'%3E%3Crect width='1400' height='520' fill='%23e94f64'/%3E%3Cpath d='M0 382 C180 280 318 330 482 250 C668 160 830 118 1022 182 C1176 234 1288 202 1400 132 L1400 520 L0 520 Z' fill='%23f6b35d'/%3E%3Cpath d='M0 146 C142 74 298 98 430 174 C560 250 676 262 820 194 C1010 104 1212 70 1400 118 L1400 0 L0 0 Z' fill='%235061b8' fill-opacity='0.72'/%3E%3Ccircle cx='1018' cy='268' r='92' fill='%23ffffff' fill-opacity='0.18'/%3E%3Ccircle cx='1120' cy='286' r='62' fill='%23ffffff' fill-opacity='0.15'/%3E%3C/svg%3E");
+      background-size:cover;
+      background-position:center;
+    }
+    .wrap { width:min(1180px, calc(100% - 32px)); margin:0 auto; }
+    .hero-inner { min-height:500px; display:grid; grid-template-columns:minmax(0,1fr) 330px; align-items:center; gap:42px; padding:44px 0; }
+    .eyebrow { font-size:13px; text-transform:uppercase; letter-spacing:.08em; opacity:.88; font-weight:800; }
+    h1 { margin:10px 0 12px; font-size:clamp(38px, 7vw, 82px); line-height:.98; letter-spacing:0; }
+    h2 { margin:0; font-size:24px; letter-spacing:0; }
+    h3 { margin:0; font-size:16px; letter-spacing:0; }
+    .lead { max-width:780px; margin:0; font-size:18px; color:rgba(255,255,255,.92); }
+    .hero-meta, .legend, .notes { display:flex; flex-wrap:wrap; gap:10px; }
+    .pill, .status {
+      display:inline-flex; align-items:center; min-height:30px; padding:6px 10px;
+      border-radius:6px; font-size:13px; font-weight:800;
+    }
+    .pill { margin-top:20px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.30); }
+    .status { background:#e9f4ef; color:#256b5e; border:1px solid #cbe1d7; }
+    .page-nav {
+      position:sticky; top:12px; z-index:30; display:flex; flex-wrap:wrap; gap:8px;
+      margin:0 0 18px; padding:9px; border:1px solid var(--line); border-radius:12px;
+      background:rgba(255,255,255,.92); backdrop-filter:blur(8px); box-shadow:0 10px 24px rgba(24,33,38,.06);
+      max-width:100%;
+    }
+    .page-link {
+      display:inline-flex; align-items:center; justify-content:center; min-height:34px; padding:7px 11px;
+      border:1px solid transparent; border-radius:8px; color:var(--ink); text-decoration:none; font-size:13px; font-weight:850;
+    }
+    .page-link:hover { background:#fff; border-color:var(--line); }
+    .phone { width:100%; max-width:330px; justify-self:end; border:1px solid rgba(255,255,255,.36); border-radius:24px; padding:13px; background:rgba(255,255,255,.14); box-shadow:0 28px 80px rgba(0,0,0,.22); }
+    .phone-screen { min-height:520px; border-radius:18px; background:linear-gradient(180deg, #fff 0 46%, #ffe4d1 100%); color:var(--ink); padding:16px; display:flex; flex-direction:column; gap:12px; justify-content:space-between; }
+    .phone-top, .mini-list { display:flex; justify-content:space-between; gap:10px; font-size:13px; color:var(--muted); }
+    .mini-summary { border:1px solid var(--line); border-radius:8px; padding:14px; background:#fff; }
+    .mini-list { display:grid; gap:8px; margin-top:14px; }
+    .mini-list div { display:flex; justify-content:space-between; }
+    .main { padding:22px 0 56px; }
+    .kpis, .inline-kpis { display:grid; grid-template-columns:repeat(6, minmax(0,1fr)); gap:12px; align-items:stretch; }
+    .main > .wrap > .kpis { margin-top:22px; }
+    .section { position:relative; margin-top:18px; padding:20px; background:var(--paper); border:1px solid rgba(24,33,38,.10); border-radius:12px; box-shadow:0 10px 24px rgba(24,33,38,.035); overflow:hidden; }
+    .subsection { margin-top:18px; padding-top:18px; border-top:1px solid var(--line); }
+    .subsection:first-child { margin-top:0; padding-top:0; border-top:0; }
+    .section-head { display:flex; justify-content:space-between; gap:14px; align-items:flex-start; margin-bottom:16px; }
+    .sub, .metric-note, .note { color:var(--muted); }
+    .sub { margin:4px 0 0; }
+    .metric { background:#fff; border:1px solid var(--line); border-radius:8px; padding:14px; min-width:0; min-height:116px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; }
+    .metric-name { color:var(--muted); font-size:13px; font-weight:800; }
+    .metric-value { margin-top:4px; font-size:clamp(22px, 2.1vw, 30px); line-height:1.12; font-weight:850; overflow-wrap:anywhere; word-break:keep-all; }
+    .metric-note { margin-top:2px; font-size:12px; }
+    .story-label { color:var(--muted); font-size:11px; font-weight:850; letter-spacing:.08em; text-transform:uppercase; }
+    .compare-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap:14px; }
+    .compare-card { padding:14px; border:1px solid var(--line); border-radius:10px; background:rgba(255,255,255,.74); min-width:0; min-height:132px; display:flex; flex-direction:column; justify-content:space-between; }
+    .compare-values { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; margin-top:10px; }
+    .compare-values > div:last-child { text-align:right; }
+    .compare-current { font-size:clamp(18px, 2vw, 25px); line-height:1.15; margin-top:2px; font-weight:850; overflow-wrap:anywhere; }
+    .compare-previous { font-size:clamp(15px, 1.5vw, 19px); line-height:1.15; margin-top:4px; font-weight:800; color:var(--muted); overflow-wrap:anywhere; }
+    .up { color:#256b5e; }
+    .down { color:#c2414b; }
+    .section-flow { display:grid; grid-template-columns:280px minmax(0,1fr); gap:20px; align-items:start; }
+    .section-copy { color:var(--muted); font-size:14px; line-height:1.6; }
+    .two-col { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start; }
+    .three-col { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px; align-items:start; }
+    .panel { min-width:0; }
+    .panel-title { margin:0 0 10px; color:var(--muted); font-size:13px; font-weight:850; }
+    .chart-shell { height:340px; border:1px solid var(--line); border-radius:10px; padding:12px; background:linear-gradient(180deg, rgba(255,247,237,.76) 0%, #fbfcfb 100%); min-width:0; overflow:hidden; }
+    .compact-chart { height:260px; }
+    canvas { width:100% !important; height:100% !important; }
+    .legend { margin:8px 0 10px; color:var(--muted); font-size:13px; font-weight:800; }
+    .legend i { display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--dot); margin-right:6px; }
+    .country-toolbar { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 4px; }
+    .country-tab {
+      border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:6px;
+      min-height:34px; padding:7px 11px; font-weight:800; cursor:pointer;
+    }
+    .country-tab[aria-pressed="true"] { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .country-context { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+    .segment-detail-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; margin-top:14px; }
+    .segment-detail {
+      border:1px solid var(--line); border-radius:8px; padding:14px; background:#fff;
+      display:grid; gap:8px; min-width:0;
+    }
+    .segment-detail h3 { margin:0; font-size:16px; }
+    .segment-meta { display:flex; flex-wrap:wrap; gap:8px; color:var(--muted); font-size:12px; font-weight:800; }
+    .segment-action { color:var(--ink); font-size:13px; }
+    .number-table { margin-top:14px; overflow:auto; border:1px solid var(--line); border-radius:8px; max-height:360px; background:#fff; width:100%; max-width:100%; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th, td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap; }
+    th:first-child, td:first-child { text-align:left; }
+    th { background:#f1f5f3; color:#425158; font-size:12px; }
+    tr:last-child td { border-bottom:0; }
+    .note { flex:1 1 260px; border:1px solid var(--line); border-radius:8px; padding:10px; background:#fbfcfb; font-size:13px; min-width:0; }
+    .funnel-grid { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; margin-top:14px; }
+    .funnel-card { border:1px solid var(--line); border-radius:8px; padding:14px; background:#fffdfa; }
+    .funnel-title { display:flex; justify-content:space-between; gap:10px; font-weight:850; }
+    .funnel-title span { color:var(--muted); font-weight:700; font-size:12px; text-align:right; }
+    .funnel-row { display:grid; grid-template-columns:82px minmax(0,1fr) 62px; gap:8px; align-items:center; margin-top:9px; font-size:13px; }
+    .funnel-track { height:8px; border-radius:99px; background:#edf1f0; overflow:hidden; }
+    .funnel-fill { height:100%; border-radius:99px; background:var(--funnel-color); }
+    summary { cursor:pointer; }
+    details > summary { list-style:none; }
+    details summary::-webkit-details-marker { display:none; }
+    details.section > summary .section-head { margin-bottom:0; }
+    @media (max-width:900px) {
+      .hero-inner, .two-col, .three-col, .section-flow { grid-template-columns:1fr; }
+      .phone { justify-self:start; }
+      .kpis, .inline-kpis { grid-template-columns:repeat(2, minmax(0,1fr)); }
+      .funnel-grid { grid-template-columns:1fr; }
+      .segment-detail-grid { grid-template-columns:1fr; }
+    }
+    @media (max-width:1180px) {
+      .kpis, .inline-kpis { grid-template-columns:repeat(3, minmax(0,1fr)); }
+    }
+    @media (max-width:560px) {
+      .kpis, .inline-kpis { grid-template-columns:1fr; }
+      .section { padding:14px; }
+      .section-head { flex-direction:column; }
+      .phone-screen { min-height:420px; }
+      h1 { font-size:42px; }
+    }
+
+    .hero { background:linear-gradient(90deg, rgba(24,33,38,.72), rgba(24,33,38,.24)), linear-gradient(135deg, #182126 0%, #2f7f82 52%, #e94f64 100%); }
+    .hero-inner { grid-template-columns:minmax(0,1fr); min-height:380px; }
+    .main > .wrap > .kpis { margin-top:0; }
+    .funnel-grid { grid-template-columns:1fr; }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow">Flirting Korea Dashboard</div>
+        <h1>플러팅 한국 운영 대시보드</h1>
+        <p class="lead">한국 회원의 가입, 승인, 접속, 관계 전환, 결제, 광고 효율만 별도로 봅니다. 타 국가 데이터와 국가 선택 UI는 제외했습니다.</p>
+        <div class="hero-meta">
+          <span class="pill">스냅샷 2026-07-07</span>
+          <span class="pill">생성 2026. 07. 08. 12:47</span>
+          <span class="pill">한국 전용</span>
+          <span class="pill">광고 2026-06-09 ~ 2026-07-07</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="wrap">
+      <nav class="page-nav" aria-label="한국 대시보드 목차">
+        <a class="page-link" href="index.html">전체판</a>
+        <a class="page-link" href="#summary">요약</a>
+        <a class="page-link" href="#trend">흐름</a>
+        <a class="page-link" href="#funnel">퍼널</a>
+        <a class="page-link" href="#supply">성별·연령</a>
+        <a class="page-link" href="#interests">관심사</a>
+        <a class="page-link" href="#segments">고객군집</a>
+        <a class="page-link" href="#ads">광고</a>
+      </nav>
+
+      <section class="kpis" id="summary" aria-label="한국 핵심 지표">
+        
+        <div class="metric">
+          <div class="metric-name">한국 가입</div>
+          <div class="metric-value">312</div>
+          <div class="metric-note">활동 가능 246명</div>
+        </div>
+        
+        <div class="metric">
+          <div class="metric-name">승인 회원</div>
+          <div class="metric-value">224</div>
+          <div class="metric-note">승인율 71.8%</div>
+        </div>
+        
+        <div class="metric">
+          <div class="metric-name">여성 비중</div>
+          <div class="metric-value">11.2%</div>
+          <div class="metric-note">남성:여성 7.9:1</div>
+        </div>
+        
+        <div class="metric">
+          <div class="metric-name">최근 접속</div>
+          <div class="metric-value">29</div>
+          <div class="metric-note">last_seen 기준</div>
+        </div>
+        
+        <div class="metric">
+          <div class="metric-name">매칭 전환</div>
+          <div class="metric-value">94</div>
+          <div class="metric-note">좋아요 대비 4.2%</div>
+        </div>
+        
+        <div class="metric">
+          <div class="metric-name">구매</div>
+          <div class="metric-value">9</div>
+          <div class="metric-note">186,200원 · 가입 대비 2.9%</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div><div class="story-label">최근 7일 vs 이전 7일</div><h2>한국 최근 변화</h2><p class="sub">가입, 접속, 관계 전환, 구매 흐름만 비교합니다.</p></div>
+          <div class="status">KR · snapshot 2026-07-07</div>
+        </div>
+        <div class="compare-grid">
+          
+          <div class="compare-card" data-compare-field="signups" data-compare-note="신규 회원">
+            <div class="metric-name">가입</div>
+            <div class="compare-values">
+              <div>
+                <div class="metric-note">최근 7일</div>
+                <div class="compare-current">4</div>
+              </div>
+              <div>
+                <div class="metric-note">이전 7일</div>
+                <div class="compare-previous">35</div>
+              </div>
+            </div>
+            <div class="metric-note down">-88.6% vs 이전 7일 · 신규 회원</div>
+          </div>
+          
+          <div class="compare-card" data-compare-field="recent_active_users" data-compare-note="last_seen">
+            <div class="metric-name">최근 접속</div>
+            <div class="compare-values">
+              <div>
+                <div class="metric-note">최근 7일</div>
+                <div class="compare-current">29</div>
+              </div>
+              <div>
+                <div class="metric-note">이전 7일</div>
+                <div class="compare-previous">40</div>
+              </div>
+            </div>
+            <div class="metric-note down">-27.5% vs 이전 7일 · last_seen</div>
+          </div>
+          
+          <div class="compare-card" data-compare-field="likes" data-compare-note="탐색 반응">
+            <div class="metric-name">좋아요</div>
+            <div class="compare-values">
+              <div>
+                <div class="metric-note">최근 7일</div>
+                <div class="compare-current">217</div>
+              </div>
+              <div>
+                <div class="metric-note">이전 7일</div>
+                <div class="compare-previous">399</div>
+              </div>
+            </div>
+            <div class="metric-note down">-45.6% vs 이전 7일 · 탐색 반응</div>
+          </div>
+          
+          <div class="compare-card" data-compare-field="matches" data-compare-note="관계 전환">
+            <div class="metric-name">매칭</div>
+            <div class="compare-values">
+              <div>
+                <div class="metric-note">최근 7일</div>
+                <div class="compare-current">38</div>
+              </div>
+              <div>
+                <div class="metric-note">이전 7일</div>
+                <div class="compare-previous">47</div>
+              </div>
+            </div>
+            <div class="metric-note down">-19.1% vs 이전 7일 · 관계 전환</div>
+          </div>
+          
+          <div class="compare-card" data-compare-field="messages" data-compare-note="대화 깊이">
+            <div class="metric-name">메시지</div>
+            <div class="compare-values">
+              <div>
+                <div class="metric-note">최근 7일</div>
+                <div class="compare-current">13</div>
+              </div>
+              <div>
+                <div class="metric-note">이전 7일</div>
+                <div class="compare-previous">19</div>
+              </div>
+            </div>
+            <div class="metric-note down">-31.6% vs 이전 7일 · 대화 깊이</div>
+          </div>
+          
+          <div class="compare-card" data-compare-field="purchases" data-compare-note="수익화">
+            <div class="metric-name">구매</div>
+            <div class="compare-values">
+              <div>
+                <div class="metric-note">최근 7일</div>
+                <div class="compare-current">0</div>
+              </div>
+              <div>
+                <div class="metric-note">이전 7일</div>
+                <div class="compare-previous">3</div>
+              </div>
+            </div>
+            <div class="metric-note down">-100.0% vs 이전 7일 · 수익화</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="trend">
+        <div class="section-head"><div><h2>한국 일별 흐름</h2><p class="sub">최근 21일 기준 핵심 행동 흐름입니다.</p></div><div class="status">daily</div></div>
+        <div class="chart-shell"><canvas id="koreaDailyChart"></canvas></div>
+        <div class="number-table"><table><thead><tr><th>날짜</th><th>가입</th><th>최근 접속</th><th>좋아요</th><th>매칭</th><th>메시지</th><th>구매</th></tr></thead><tbody><tr><td>2026.07.07</td><td>1</td><td>5</td><td>12</td><td>20</td><td>1</td><td>0</td></tr>
+<tr><td>2026.07.06</td><td>1</td><td>3</td><td>24</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>2026.07.05</td><td>0</td><td>5</td><td>17</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>2026.07.04</td><td>1</td><td>2</td><td>26</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>2026.07.03</td><td>0</td><td>6</td><td>21</td><td>0</td><td>3</td><td>0</td></tr>
+<tr><td>2026.07.02</td><td>1</td><td>4</td><td>54</td><td>5</td><td>5</td><td>0</td></tr>
+<tr><td>2026.07.01</td><td>0</td><td>4</td><td>63</td><td>13</td><td>2</td><td>0</td></tr>
+<tr><td>2026.06.30</td><td>5</td><td>3</td><td>48</td><td>3</td><td>2</td><td>1</td></tr>
+<tr><td>2026.06.29</td><td>5</td><td>6</td><td>145</td><td>6</td><td>0</td><td>1</td></tr>
+<tr><td>2026.06.28</td><td>5</td><td>8</td><td>40</td><td>0</td><td>3</td><td>0</td></tr>
+<tr><td>2026.06.27</td><td>4</td><td>6</td><td>25</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>2026.06.26</td><td>4</td><td>4</td><td>22</td><td>28</td><td>6</td><td>1</td></tr>
+<tr><td>2026.06.25</td><td>6</td><td>6</td><td>51</td><td>10</td><td>7</td><td>0</td></tr>
+<tr><td>2026.06.24</td><td>6</td><td>7</td><td>68</td><td>0</td><td>0</td><td>0</td></tr></tbody></table></div>
+      </section>
+
+      <section class="section" id="funnel">
+        <div class="section-head"><div><h2>한국 퍼널</h2><p class="sub">가입에서 구매까지 한국 시장의 현재 전환 규모입니다.</p></div><div class="status">funnel</div></div>
+        <div class="funnel-grid">
+          <div class="funnel-card" style="--funnel-color:#2f7f82">
+            <div class="funnel-title">한국<span>승인율 71.8% · 매칭 전환 4.2%</span></div>
+            
+              <div class="funnel-row">
+                <span>가입</span>
+                <div class="funnel-track"><div class="funnel-fill" style="width:13.9%;"></div></div>
+                <span class="funnel-value">312</span>
+              </div>
+            
+              <div class="funnel-row">
+                <span>최근 접속</span>
+                <div class="funnel-track"><div class="funnel-fill" style="width:1.3%;"></div></div>
+                <span class="funnel-value">29</span>
+              </div>
+            
+              <div class="funnel-row">
+                <span>승인</span>
+                <div class="funnel-track"><div class="funnel-fill" style="width:10.0%;"></div></div>
+                <span class="funnel-value">224</span>
+              </div>
+            
+              <div class="funnel-row">
+                <span>좋아요</span>
+                <div class="funnel-track"><div class="funnel-fill" style="width:100.0%;"></div></div>
+                <span class="funnel-value">2,249</span>
+              </div>
+            
+              <div class="funnel-row">
+                <span>매칭</span>
+                <div class="funnel-track"><div class="funnel-fill" style="width:4.2%;"></div></div>
+                <span class="funnel-value">94</span>
+              </div>
+            
+              <div class="funnel-row">
+                <span>메시지</span>
+                <div class="funnel-track"><div class="funnel-fill" style="width:3.1%;"></div></div>
+                <span class="funnel-value">69</span>
+              </div>
+            
+              <div class="funnel-row">
+                <span>구매</span>
+                <div class="funnel-track"><div class="funnel-fill" style="width:0.4%;"></div></div>
+                <span class="funnel-value">9</span>
+              </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="supply">
+        <div class="section-head"><div><h2>한국 성별·연령 공급</h2><p class="sub">여성 공급 부족과 활동 연령대를 같이 봅니다.</p></div><div class="status">supply</div></div>
+        <div class="three-col">
+          <div class="panel"><div class="legend"><span><i style="--dot:#4f64c8"></i>가입 성별</span></div><div class="chart-shell compact-chart"><canvas id="koreaGenderChart"></canvas></div></div>
+          <div class="panel"><div class="legend"><span><i style="--dot:#e94f64"></i>가입 연령</span></div><div class="chart-shell compact-chart"><canvas id="koreaAgeChart"></canvas></div></div>
+          <div class="panel"><div class="legend"><span><i style="--dot:#2f7f82"></i>활동 연령</span></div><div class="chart-shell compact-chart"><canvas id="koreaActivityAgeChart"></canvas></div></div>
+        </div>
+      </section>
+
+      <section class="section" id="interests">
+        <div class="section-head"><div><h2>한국 관심사와 탐색</h2><p class="sub">가입 시 선택 관심사와 앱 내 탐색 카테고리만 남겼습니다.</p></div><div class="status">interest</div></div>
+        <div class="two-col">
+          <div class="panel"><div class="legend"><span><i style="--dot:#4f64c8"></i>Top 관심사</span></div><div class="chart-shell compact-chart"><canvas id="koreaInterestChart"></canvas></div><div class="number-table"><table><thead><tr><th>관심 카테고리</th><th>관심사</th><th>회원</th></tr></thead><tbody><tr><td>음악</td><td>🎧 음악</td><td>131</td></tr>
+<tr><td>영상/콘텐츠</td><td>🎬 영화</td><td>118</td></tr>
+<tr><td>카페/맛집</td><td>☕ 카페</td><td>98</td></tr>
+<tr><td>카페/맛집</td><td>🍖 맛집 탐방</td><td>96</td></tr>
+<tr><td>운동/활동</td><td>🏞️ 산책</td><td>93</td></tr>
+<tr><td>여행/아웃도어</td><td>🚗 드라이브</td><td>91</td></tr>
+<tr><td>여행/아웃도어</td><td>✈️ 여행</td><td>81</td></tr>
+<tr><td>카페/맛집</td><td>🍺 맥주 한잔</td><td>52</td></tr>
+<tr><td>문화/예술</td><td>🎤 노래방</td><td>52</td></tr>
+<tr><td>게임/디지털</td><td>🎮 게임</td><td>51</td></tr>
+<tr><td>운동/활동</td><td>🏋️ 헬스</td><td>50</td></tr>
+<tr><td>여행/아웃도어</td><td>🌊 자연</td><td>41</td></tr></tbody></table></div></div>
+          <div class="panel"><div class="legend"><span><i style="--dot:#d58c2a"></i>탐색 카테고리</span></div><div class="chart-shell compact-chart"><canvas id="koreaBrowseChart"></canvas></div><div class="number-table"><table><thead><tr><th>탐색 카테고리</th><th>사용 회원</th><th>조회</th><th>하트 사용</th></tr></thead><tbody><tr><td>상위 5% 매력 프로필</td><td>58</td><td>14</td><td>14</td></tr>
+<tr><td>오늘 접속한 이성</td><td>39</td><td>9</td><td>9</td></tr>
+<tr><td>술 한잔 대화 잘 통하는 이성</td><td>46</td><td>2</td><td>2</td></tr>
+<tr><td>게임 좋아하는 이성</td><td>30</td><td>2</td><td>2</td></tr>
+<tr><td>지금 활동중인 이성</td><td>41</td><td>1</td><td>1</td></tr>
+<tr><td>대화 잘 통하는 이성</td><td>39</td><td>1</td><td>1</td></tr>
+<tr><td>새로 가입한 이성</td><td>32</td><td>1</td><td>1</td></tr>
+<tr><td>지금 내 근처에 있는 이성</td><td>72</td><td>0</td><td>0</td></tr></tbody></table></div></div>
+        </div>
+      </section>
+
+      <section class="section" id="segments">
+        <div class="section-head"><div><h2>한국 고객군집</h2><p class="sub">한국 회원만 대상으로 나뉜 행동·관심·결제 군집입니다.</p></div><div class="status">312 members</div></div>
+        <div class="two-col">
+          <div class="panel"><div class="legend"><span><i style="--dot:#4f64c8"></i>군집 규모</span></div><div class="chart-shell compact-chart"><canvas id="koreaSegmentSizeChart"></canvas></div></div>
+          <div class="panel"><div class="legend"><span><i style="--dot:#e94f64"></i>군집 핵심점수</span></div><div class="chart-shell compact-chart"><canvas id="koreaSegmentScoreChart"></canvas></div></div>
+        </div>
+        <div class="number-table"><table><thead><tr><th>군집</th><th>회원</th><th>비중</th><th>핵심점수</th><th>여성 비중</th><th>남성:여성</th><th>승인율</th><th>최근접속</th><th>추천 액션</th></tr></thead><tbody><tr><td>#1 결제 가능성 높은 고객</td><td>11</td><td>3.5%</td><td>85.6</td><td>18.2%</td><td>4.5:1</td><td>100.0%</td><td>3.3일</td><td>하트 사용 맥락과 프리미엄 혜택 노출을 정교화합니다.</td></tr>
+<tr><td>#2 결제 가능성 높은 고객</td><td>12</td><td>3.9%</td><td>32.7</td><td>8.3%</td><td>11.0:1</td><td>100.0%</td><td>22.5일</td><td>하트 사용 맥락과 프리미엄 혜택 노출을 정교화합니다.</td></tr>
+<tr><td>#3 저활동 이탈 위험군</td><td>149</td><td>47.8%</td><td>2.4</td><td>0.0%</td><td>∞</td><td>100.0%</td><td>22.1일</td><td>재방문 알림, 관심사 기반 추천, 가입 직후 빈 화면 문제를 점검합니다.</td></tr>
+<tr><td>#4 저활동 이탈 위험군</td><td>108</td><td>34.6%</td><td>0.0</td><td>0.0%</td><td>∞</td><td>99.1%</td><td>39.6일</td><td>재방문 알림, 관심사 기반 추천, 가입 직후 빈 화면 문제를 점검합니다.</td></tr>
+<tr><td>#5 안전 리스크 관찰군</td><td>32</td><td>10.3%</td><td>-4.0</td><td>100.0%</td><td>0.0:1</td><td>90.6%</td><td>26.6일</td><td>신고/차단 패턴을 별도 모니터링하고 노출/추천 가중치를 보수적으로 둡니다.</td></tr></tbody></table></div>
+      </section>
+
+      <section class="section" id="ads">
+        <div class="section-head"><div><h2>한국 Meta 광고</h2><p class="sub">Meta CSV 중 한국 캠페인/국가 행만 사용합니다. 앱 유저와 직접 조인하지 않습니다.</p></div><div class="status">CSV 2026-06-09 ~ 2026-07-07</div></div>
+        <section class="inline-kpis" aria-label="한국 광고 지표">
+          
+        <div class="metric">
+          <div class="metric-name">지출</div>
+          <div class="metric-value">559,482원</div>
+          <div class="metric-note">KR 캠페인</div>
+        </div>
+          
+        <div class="metric">
+          <div class="metric-name">결과</div>
+          <div class="metric-value">187</div>
+          <div class="metric-note">Meta 결과</div>
+        </div>
+          
+        <div class="metric">
+          <div class="metric-name">결과당 비용</div>
+          <div class="metric-value">2,991원</div>
+          <div class="metric-note">지출 / 결과</div>
+        </div>
+          
+        <div class="metric">
+          <div class="metric-name">링크 클릭</div>
+          <div class="metric-value">2,099</div>
+          <div class="metric-note">CTR 0.12%</div>
+        </div>
+          
+        <div class="metric">
+          <div class="metric-name">광고 기준일</div>
+          <div class="metric-value">2026-07-07</div>
+          <div class="metric-note">CSV fallback</div>
+        </div>
+          
+        <div class="metric">
+          <div class="metric-name">API 상태</div>
+          <div class="metric-value">blocked</div>
+          <div class="metric-note">Meta API access blocked</div>
+        </div>
+        </section>
+        <div class="two-col" style="margin-top:14px;">
+          <div class="panel"><div class="legend"><span><i style="--dot:#4f64c8"></i>날짜별 지출/결과</span></div><div class="chart-shell compact-chart"><canvas id="koreaAdsDailyChart"></canvas></div></div>
+          <div class="panel"><div class="panel-title">광고 상세 breakdown</div><div class="number-table"><table><thead><tr><th>구분</th><th>지출</th><th>클릭</th><th>결과</th><th>결과당 비용</th></tr></thead><tbody><tr><td>55-64 / unknown</td><td>139,358원</td><td>481</td><td>48</td><td>2,903원</td></tr>
+<tr><td>45-54 / unknown</td><td>128,772원</td><td>540</td><td>36</td><td>3,577원</td></tr>
+<tr><td>35-44 / unknown</td><td>102,328원</td><td>387</td><td>18</td><td>5,684원</td></tr>
+<tr><td>25-34 / unknown</td><td>95,450원</td><td>384</td><td>39</td><td>2,447원</td></tr>
+<tr><td>65+ / unknown</td><td>54,306원</td><td>160</td><td>18</td><td>3,017원</td></tr>
+<tr><td>18-24 / unknown</td><td>39,253원</td><td>147</td><td>28</td><td>1,401원</td></tr>
+<tr><td>Unknown / unknown</td><td>15원</td><td>0</td><td>0</td><td>0원</td></tr></tbody></table></div></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head"><div><h2>데이터 기준</h2><p class="sub">한국판은 `country_code=KR` 집계만 포함합니다.</p></div><div class="status">privacy-safe</div></div>
+        <div class="notes">
+          <div class="note">타 국가 행, 국가 비교 차트, 국가 선택 버튼은 한국판에서 제외했습니다.</div>
+          <div class="note">개인 식별자, 메시지 본문, 연락처, 결제 토큰은 HTML에 포함하지 않습니다.</div>
+          <div class="note">광고 지표는 Meta API 차단으로 CSV fallback 기준이며 앱 데이터 스냅샷과 기준일이 다를 수 있습니다.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+
+    const koreaData = {"daily":[{"country_code":"KR","day":"2026-06-24","likes":68,"matches":0,"messages":0,"purchases":0,"recent_active_users":7,"signups":6},{"country_code":"KR","day":"2026-06-25","likes":51,"matches":10,"messages":7,"purchases":0,"recent_active_users":6,"signups":6},{"country_code":"KR","day":"2026-06-26","likes":22,"matches":28,"messages":6,"purchases":1,"recent_active_users":4,"signups":4},{"country_code":"KR","day":"2026-06-27","likes":25,"matches":0,"messages":1,"purchases":0,"recent_active_users":6,"signups":4},{"country_code":"KR","day":"2026-06-28","likes":40,"matches":0,"messages":3,"purchases":0,"recent_active_users":8,"signups":5},{"country_code":"KR","day":"2026-06-29","likes":145,"matches":6,"messages":0,"purchases":1,"recent_active_users":6,"signups":5},{"country_code":"KR","day":"2026-06-30","likes":48,"matches":3,"messages":2,"purchases":1,"recent_active_users":3,"signups":5},{"country_code":"KR","day":"2026-07-01","likes":63,"matches":13,"messages":2,"purchases":0,"recent_active_users":4,"signups":0},{"country_code":"KR","day":"2026-07-02","likes":54,"matches":5,"messages":5,"purchases":0,"recent_active_users":4,"signups":1},{"country_code":"KR","day":"2026-07-03","likes":21,"matches":0,"messages":3,"purchases":0,"recent_active_users":6,"signups":0},{"country_code":"KR","day":"2026-07-04","likes":26,"matches":0,"messages":1,"purchases":0,"recent_active_users":2,"signups":1},{"country_code":"KR","day":"2026-07-05","likes":17,"matches":0,"messages":0,"purchases":0,"recent_active_users":5,"signups":0},{"country_code":"KR","day":"2026-07-06","likes":24,"matches":0,"messages":1,"purchases":0,"recent_active_users":3,"signups":1},{"country_code":"KR","day":"2026-07-07","likes":12,"matches":20,"messages":1,"purchases":0,"recent_active_users":5,"signups":1}],"signupGender":[{"country_code":"KR","gender_label":"남성","users":277},{"country_code":"KR","gender_label":"여성","users":35}],"signupAge":[{"age_bucket":"10대","country_code":"KR","sort_order":1,"users":5},{"age_bucket":"20-24","country_code":"KR","sort_order":2,"users":50},{"age_bucket":"25-29","country_code":"KR","sort_order":3,"users":52},{"age_bucket":"30-34","country_code":"KR","sort_order":4,"users":43},{"age_bucket":"35-39","country_code":"KR","sort_order":5,"users":23},{"age_bucket":"40+","country_code":"KR","sort_order":6,"users":139},{"age_bucket":"미상","country_code":"KR","sort_order":7,"users":0}],"activityAge":[{"age_bucket":"10대","country_code":"KR","likes":11,"matches":0,"messages":0,"purchases":0,"sort_order":1},{"age_bucket":"20-24","country_code":"KR","likes":191,"matches":3,"messages":0,"purchases":0,"sort_order":2},{"age_bucket":"25-29","country_code":"KR","likes":432,"matches":25,"messages":21,"purchases":2,"sort_order":3},{"age_bucket":"30-34","country_code":"KR","likes":521,"matches":26,"messages":31,"purchases":2,"sort_order":4},{"age_bucket":"35-39","country_code":"KR","likes":115,"matches":4,"messages":0,"purchases":0,"sort_order":5},{"age_bucket":"40+","country_code":"KR","likes":979,"matches":36,"messages":17,"purchases":5,"sort_order":6},{"age_bucket":"미상","country_code":"KR","likes":0,"matches":0,"messages":0,"purchases":0,"sort_order":7}],"interestOptions":[{"country_code":"KR","interest_category":"음악","interest_name":"🎧 음악","users":131},{"country_code":"KR","interest_category":"영상/콘텐츠","interest_name":"🎬 영화","users":118},{"country_code":"KR","interest_category":"카페/맛집","interest_name":"☕ 카페","users":98},{"country_code":"KR","interest_category":"카페/맛집","interest_name":"🍖 맛집 탐방","users":96},{"country_code":"KR","interest_category":"운동/활동","interest_name":"🏞️ 산책","users":93},{"country_code":"KR","interest_category":"여행/아웃도어","interest_name":"🚗 드라이브","users":91},{"country_code":"KR","interest_category":"여행/아웃도어","interest_name":"✈️ 여행","users":81},{"country_code":"KR","interest_category":"카페/맛집","interest_name":"🍺 맥주 한잔","users":52},{"country_code":"KR","interest_category":"문화/예술","interest_name":"🎤 노래방","users":52},{"country_code":"KR","interest_category":"게임/디지털","interest_name":"🎮 게임","users":51},{"country_code":"KR","interest_category":"운동/활동","interest_name":"🏋️ 헬스","users":50},{"country_code":"KR","interest_category":"여행/아웃도어","interest_name":"🌊 자연","users":41}],"interestCategories":[{"country_code":"KR","interest_category":"카페/맛집","users":170},{"country_code":"KR","interest_category":"여행/아웃도어","users":155},{"country_code":"KR","interest_category":"운동/활동","users":154},{"country_code":"KR","interest_category":"음악","users":131},{"country_code":"KR","interest_category":"영상/콘텐츠","users":118},{"country_code":"KR","interest_category":"문화/예술","users":98},{"country_code":"KR","interest_category":"게임/디지털","users":75},{"country_code":"KR","interest_category":"라이프스타일","users":56}],"browse":[{"code":"top_5_percent","country_code":"KR","hearts_used":14,"name":"상위 5% 매력 프로필","users_with_state":58,"viewed_count":14},{"code":"online_today","country_code":"KR","hearts_used":9,"name":"오늘 접속한 이성","users_with_state":39,"viewed_count":9},{"code":"drinking_conversation","country_code":"KR","hearts_used":2,"name":"술 한잔 대화 잘 통하는 이성","users_with_state":46,"viewed_count":2},{"code":"likes_games","country_code":"KR","hearts_used":2,"name":"게임 좋아하는 이성","users_with_state":30,"viewed_count":2},{"code":"active_now","country_code":"KR","hearts_used":1,"name":"지금 활동중인 이성","users_with_state":41,"viewed_count":1},{"code":"good_conversation","country_code":"KR","hearts_used":1,"name":"대화 잘 통하는 이성","users_with_state":39,"viewed_count":1},{"code":"new_member","country_code":"KR","hearts_used":1,"name":"새로 가입한 이성","users_with_state":32,"viewed_count":1},{"code":"near_me","country_code":"KR","hearts_used":0,"name":"지금 내 근처에 있는 이성","users_with_state":72,"viewed_count":0}],"recentLogin":[{"country_code":"KR","day":"2026-06-24","female":0,"male":7,"total":7},{"country_code":"KR","day":"2026-06-25","female":2,"male":4,"total":6},{"country_code":"KR","day":"2026-06-26","female":0,"male":4,"total":4},{"country_code":"KR","day":"2026-06-27","female":0,"male":6,"total":6},{"country_code":"KR","day":"2026-06-28","female":1,"male":7,"total":8},{"country_code":"KR","day":"2026-06-29","female":0,"male":6,"total":6},{"country_code":"KR","day":"2026-06-30","female":0,"male":3,"total":3},{"country_code":"KR","day":"2026-07-01","female":1,"male":3,"total":4},{"country_code":"KR","day":"2026-07-02","female":2,"male":2,"total":4},{"country_code":"KR","day":"2026-07-03","female":1,"male":5,"total":6},{"country_code":"KR","day":"2026-07-04","female":1,"male":1,"total":2},{"country_code":"KR","day":"2026-07-05","female":0,"male":5,"total":5},{"country_code":"KR","day":"2026-07-06","female":0,"male":3,"total":3},{"country_code":"KR","day":"2026-07-07","female":2,"male":3,"total":5}],"purchase":[{"amount":0,"country_code":"KR","day":"2026-06-24","hearts":16,"messages":0,"purchases":0,"reports":0},{"amount":0,"country_code":"KR","day":"2026-06-25","hearts":8,"messages":7,"purchases":0,"reports":0},{"amount":18000,"country_code":"KR","day":"2026-06-26","hearts":10,"messages":6,"purchases":1,"reports":0},{"amount":0,"country_code":"KR","day":"2026-06-27","hearts":3,"messages":1,"purchases":0,"reports":0},{"amount":0,"country_code":"KR","day":"2026-06-28","hearts":6,"messages":3,"purchases":0,"reports":0},{"amount":18000,"country_code":"KR","day":"2026-06-29","hearts":37,"messages":0,"purchases":1,"reports":0},{"amount":39000,"country_code":"KR","day":"2026-06-30","hearts":18,"messages":2,"purchases":1,"reports":0},{"amount":0,"country_code":"KR","day":"2026-07-01","hearts":15,"messages":2,"purchases":0,"reports":0},{"amount":0,"country_code":"KR","day":"2026-07-02","hearts":19,"messages":5,"purchases":0,"reports":0},{"amount":0,"country_code":"KR","day":"2026-07-03","hearts":7,"messages":3,"purchases":0,"reports":0},{"amount":0,"country_code":"KR","day":"2026-07-04","hearts":2,"messages":1,"purchases":0,"reports":0},{"amount":0,"country_code":"KR","day":"2026-07-05","hearts":2,"messages":0,"purchases":0,"reports":0},{"amount":0,"country_code":"KR","day":"2026-07-06","hearts":1,"messages":1,"purchases":0,"reports":0},{"amount":0,"country_code":"KR","day":"2026-07-07","hearts":2,"messages":1,"purchases":0,"reports":0}],"metaDaily":[{"country_code":"KR","country_label":"한국","day":"2026-06-09","spend":18873,"impressions":1175,"reach":799,"link_clicks":56,"results":15,"ctr":4.76595744680851,"cpm":16062.127659574468,"cpc":337.01785714285717,"cost_per_result":1258.2,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-10","spend":15791,"impressions":1042,"reach":741,"link_clicks":58,"results":16,"ctr":5.566218809980806,"cpm":15154.51055662188,"cpc":272.2586206896552,"cost_per_result":986.9375,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-11","spend":12563,"impressions":1058,"reach":725,"link_clicks":46,"results":10,"ctr":4.3478260869565215,"cpm":11874.29111531191,"cpc":273.10869565217394,"cost_per_result":1256.3,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-12","spend":14376,"impressions":1315,"reach":1024,"link_clicks":42,"results":9,"ctr":3.193916349809886,"cpm":10932.319391634981,"cpc":342.2857142857143,"cost_per_result":1597.3333333333333,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-13","spend":13860,"impressions":1011,"reach":831,"link_clicks":29,"results":7,"ctr":2.868447082096934,"cpm":13709.19881305638,"cpc":477.9310344827586,"cost_per_result":1980.0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-14","spend":13756,"impressions":1067,"reach":880,"link_clicks":39,"results":6,"ctr":3.6551077788191186,"cpm":12892.221180880975,"cpc":352.71794871794873,"cost_per_result":2292.6666666666665,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-15","spend":13313,"impressions":990,"reach":781,"link_clicks":25,"results":9,"ctr":2.525252525252525,"cpm":13447.474747474747,"cpc":532.52,"cost_per_result":1479.2222222222222,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-16","spend":16197,"impressions":1032,"reach":788,"link_clicks":32,"results":7,"ctr":3.10077519379845,"cpm":15694.767441860466,"cpc":506.15625,"cost_per_result":2313.8571428571427,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-17","spend":26752,"impressions":1350,"reach":918,"link_clicks":39,"results":14,"ctr":2.888888888888889,"cpm":19816.296296296296,"cpc":685.9487179487179,"cost_per_result":1910.857142857143,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-18","spend":24009,"impressions":1728,"reach":1064,"link_clicks":67,"results":17,"ctr":3.877314814814815,"cpm":13894.09722222222,"cpc":358.34328358208955,"cost_per_result":1412.2941176470588,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-19","spend":25910,"impressions":2017,"reach":1237,"link_clicks":70,"results":16,"ctr":3.470500743678731,"cpm":12845.81060981656,"cpc":370.14285714285717,"cost_per_result":1619.375,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-20","spend":19993,"impressions":1526,"reach":1014,"link_clicks":46,"results":12,"ctr":3.014416775884666,"cpm":13101.572739187417,"cpc":434.6304347826087,"cost_per_result":1666.0833333333333,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-21","spend":25906,"impressions":2195,"reach":1419,"link_clicks":46,"results":12,"ctr":2.0956719817767655,"cpm":11802.277904328019,"cpc":563.1739130434783,"cost_per_result":2158.8333333333335,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-22","spend":19270,"impressions":1489,"reach":1046,"link_clicks":29,"results":12,"ctr":1.9476158495634655,"cpm":12941.571524513096,"cpc":664.4827586206897,"cost_per_result":1605.8333333333333,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-23","spend":20089,"impressions":1706,"reach":1195,"link_clicks":35,"results":9,"ctr":2.0515826494724503,"cpm":11775.498241500585,"cpc":573.9714285714285,"cost_per_result":2232.1111111111113,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-24","spend":18326,"impressions":2561,"reach":1223,"link_clicks":42,"results":9,"ctr":1.6399843811011325,"cpm":7155.798516204608,"cpc":436.3333333333333,"cost_per_result":2036.2222222222222,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-25","spend":18087,"impressions":1432,"reach":938,"link_clicks":31,"results":5,"ctr":2.164804469273743,"cpm":12630.586592178772,"cpc":583.4516129032259,"cost_per_result":3617.4,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-26","spend":19395,"impressions":1119,"reach":817,"link_clicks":42,"results":2,"ctr":3.753351206434316,"cpm":17332.439678284183,"cpc":461.7857142857143,"cost_per_result":9697.5,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-27","spend":18761,"impressions":1204,"reach":859,"link_clicks":42,"results":0,"ctr":3.488372093023256,"cpm":15582.225913621263,"cpc":446.6904761904762,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-28","spend":18384,"impressions":1121,"reach":681,"link_clicks":38,"results":0,"ctr":3.389830508474576,"cpm":16399.64317573595,"cpc":483.7894736842105,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-29","spend":9932,"impressions":732,"reach":415,"link_clicks":17,"results":0,"ctr":2.3224043715846996,"cpm":13568.306010928962,"cpc":584.2352941176471,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-06-30","spend":11171,"impressions":4371,"reach":1884,"link_clicks":19,"results":0,"ctr":0.43468313886982385,"cpm":2555.708075955159,"cpc":587.9473684210526,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-07-01","spend":18748,"impressions":117349,"reach":21892,"link_clicks":97,"results":0,"ctr":0.0826594176345772,"cpm":159.76275894979932,"cpc":193.27835051546393,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-07-02","spend":29144,"impressions":428541,"reach":45242,"link_clicks":271,"results":0,"ctr":0.06323782321878187,"cpm":68.00749519882578,"cpc":107.54243542435424,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-07-03","spend":28853,"impressions":415458,"reach":42226,"link_clicks":239,"results":0,"ctr":0.057526873955971475,"cpm":69.44865666324874,"cpc":120.72384937238493,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-07-04","spend":23768,"impressions":299022,"reach":30002,"link_clicks":221,"results":0,"ctr":0.07390760546046779,"cpm":79.48579034318546,"cpc":107.5475113122172,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-07-05","spend":23352,"impressions":225234,"reach":35885,"link_clicks":176,"results":0,"ctr":0.07814095562836872,"cpm":103.6788406723674,"cpc":132.6818181818182,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-07-06","spend":19558,"impressions":194291,"reach":32326,"link_clicks":117,"results":0,"ctr":0.06021894992562703,"cpm":100.66343783294131,"cpc":167.16239316239316,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","day":"2026-07-07","spend":21345,"impressions":89967,"reach":20689,"link_clicks":88,"results":0,"ctr":0.0978136427801305,"cpm":237.25365967521424,"cpc":242.5568181818182,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1}],"metaDemo":[{"country_code":"KR","country_label":"한국","age":"55-64","gender":"unknown","spend":139358,"impressions":323933,"reach":41649,"link_clicks":481,"results":48,"ctr":0.14848749587105975,"cpm":430.2062463534126,"cpc":289.72557172557174,"cost_per_result":2903.2916666666665,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","age":"45-54","gender":"unknown","spend":128772,"impressions":531812,"reach":67043,"link_clicks":540,"results":36,"ctr":0.10153964182831526,"cpm":242.1381992132558,"cpc":238.46666666666667,"cost_per_result":3577.0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","age":"35-44","gender":"unknown","spend":102328,"impressions":423672,"reach":62852,"link_clicks":387,"results":18,"ctr":0.09134424743669631,"cpm":241.52646386827544,"cpc":264.4134366925065,"cost_per_result":5684.888888888889,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","age":"25-34","gender":"unknown","spend":95450,"impressions":338729,"reach":48691,"link_clicks":384,"results":39,"ctr":0.11336496137029897,"cpm":281.7886865311208,"cpc":248.56770833333334,"cost_per_result":2447.4358974358975,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","age":"65+","gender":"unknown","spend":54306,"impressions":106278,"reach":15396,"link_clicks":160,"results":18,"ctr":0.1505485613203109,"cpm":510.98063569130017,"cpc":339.4125,"cost_per_result":3017.0,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","age":"18-24","gender":"unknown","spend":39253,"impressions":78678,"reach":13909,"link_clicks":147,"results":28,"ctr":0.18683748951422252,"cpm":498.9069371361753,"cpc":267.02721088435374,"cost_per_result":1401.892857142857,"no_landing_spend":0,"campaign_count":1},{"country_code":"KR","country_label":"한국","age":"Unknown","gender":"unknown","spend":15,"impressions":1,"reach":1,"link_clicks":0,"results":0,"ctr":0.0,"cpm":15000.0,"cpc":0,"cost_per_result":0,"no_landing_spend":0,"campaign_count":1}],"clusters":[{"cluster_id":3,"members":11,"share":0.0353,"avg_account_age_days":69.0,"avg_last_seen_recency_days":3.3,"approval_rate":1.0,"deletion_rate":0.1818,"female_members":2,"male_members":9,"female_share":0.1818,"male_to_female_ratio":4.5,"gender_supply_status":"여성 부족","avg_likes_sent":41.09,"avg_matches_created":2.18,"avg_messages_sent":5.73,"avg_purchase_amount":15291.0,"top_country":"한국","top_gender":"남성","top_age_bucket":"25-29","top_interests":[{"name":"☕ 카페","members":7},{"name":"🎧 음악","members":6},{"name":"🚗 드라이브","members":6}],"top_interest_categories":[{"name":"여행/아웃도어","members":10},{"name":"카페/맛집","members":9},{"name":"음악","members":6}],"top_browse_categories":[{"name":"대화 잘 통하는 이성","members":6},{"name":"상위 5% 매력 프로필","members":6},{"name":"새로 가입한 이성","members":6}],"activity_intensity":100.0,"relationship_depth":100.0,"monetization_signal":82.5,"retention_signal":100.0,"safety_risk":9.1,"core_score":85.6,"label":"결제 가능성 높은 고객","recommended_action":"하트 사용 맥락과 프리미엄 혜택 노출을 정교화합니다.","rank":1,"gender_supply_role":"여성 부족 관찰군"},{"cluster_id":2,"members":12,"share":0.0385,"avg_account_age_days":36.9,"avg_last_seen_recency_days":22.5,"approval_rate":1.0,"deletion_rate":0.3333,"female_members":1,"male_members":11,"female_share":0.0833,"male_to_female_ratio":11.0,"gender_supply_status":"심각한 여성 부족","avg_likes_sent":13.17,"avg_matches_created":0.75,"avg_messages_sent":0.17,"avg_purchase_amount":1500.0,"top_country":"한국","top_gender":"남성","top_age_bucket":"30-34","top_interests":[{"name":"🎬 영화","members":9},{"name":"☕ 카페","members":7},{"name":"🎧 음악","members":6}],"top_interest_categories":[{"name":"카페/맛집","members":10},{"name":"영상/콘텐츠","members":9},{"name":"운동/활동","members":7}],"top_browse_categories":[{"name":"상위 5% 매력 프로필","members":9},{"name":"지금 내 근처에 있는 이성","members":8},{"name":"대화 잘 통하는 이성","members":7}],"activity_intensity":39.9,"relationship_depth":11.6,"monetization_signal":100.0,"retention_signal":0.0,"safety_risk":2.1,"core_score":32.7,"label":"결제 가능성 높은 고객","recommended_action":"하트 사용 맥락과 프리미엄 혜택 노출을 정교화합니다.","rank":2,"gender_supply_role":"남성 과밀군"},{"cluster_id":4,"members":149,"share":0.4776,"avg_account_age_days":28.2,"avg_last_seen_recency_days":22.1,"approval_rate":1.0,"deletion_rate":0.3087,"female_members":0,"male_members":149,"female_share":0.0,"male_to_female_ratio":null,"gender_supply_status":"심각한 여성 부족","avg_likes_sent":8.65,"avg_matches_created":0.39,"avg_messages_sent":0.03,"avg_purchase_amount":0.0,"top_country":"한국","top_gender":"남성","top_age_bucket":"40+","top_interests":[{"name":"🎧 음악","members":88},{"name":"🎬 영화","members":82},{"name":"🍖 맛집 탐방","members":70}],"top_interest_categories":[{"name":"여행/아웃도어","members":108},{"name":"카페/맛집","members":108},{"name":"운동/활동","members":106}],"top_browse_categories":[{"name":"지금 내 근처에 있는 이성","members":48},{"name":"상위 5% 매력 프로필","members":32},{"name":"술 한잔 대화 잘 통하는 이성","members":27}],"activity_intensity":19.5,"relationship_depth":5.3,"monetization_signal":0.0,"retention_signal":0.0,"safety_risk":37.8,"core_score":2.4,"label":"저활동 이탈 위험군","recommended_action":"재방문 알림, 관심사 기반 추천, 가입 직후 빈 화면 문제를 점검합니다.","rank":3,"gender_supply_role":"남성 과밀군"},{"cluster_id":1,"members":108,"share":0.3462,"avg_account_age_days":41.2,"avg_last_seen_recency_days":39.6,"approval_rate":0.9907,"deletion_rate":0.0093,"female_members":0,"male_members":108,"female_share":0.0,"male_to_female_ratio":null,"gender_supply_status":"심각한 여성 부족","avg_likes_sent":0.24,"avg_matches_created":0.0,"avg_messages_sent":0.0,"avg_purchase_amount":0.0,"top_country":"한국","top_gender":"남성","top_age_bucket":"40+","top_interests":[{"name":"🎧 음악","members":13},{"name":"☕ 카페","members":11},{"name":"🎤 노래방","members":7}],"top_interest_categories":[{"name":"카페/맛집","members":17},{"name":"운동/활동","members":16},{"name":"음악","members":13}],"top_browse_categories":[{"name":"지금 내 근처에 있는 이성","members":3},{"name":"상위 5% 매력 프로필","members":3},{"name":"술 한잔 대화 잘 통하는 이성","members":3}],"activity_intensity":0.0,"relationship_depth":0.0,"monetization_signal":0.0,"retention_signal":0.0,"safety_risk":0.0,"core_score":0.0,"label":"저활동 이탈 위험군","recommended_action":"재방문 알림, 관심사 기반 추천, 가입 직후 빈 화면 문제를 점검합니다.","rank":4,"gender_supply_role":"남성 과밀군"},{"cluster_id":0,"members":32,"share":0.1026,"avg_account_age_days":29.8,"avg_last_seen_recency_days":26.6,"approval_rate":0.9062,"deletion_rate":0.4062,"female_members":32,"male_members":0,"female_share":1.0,"male_to_female_ratio":0.0,"gender_supply_status":"성비 안정","avg_likes_sent":10.25,"avg_matches_created":0.09,"avg_messages_sent":0.0,"avg_purchase_amount":0.0,"top_country":"한국","top_gender":"여성","top_age_bucket":"40+","top_interests":[{"name":"☕ 카페","members":22},{"name":"🏞️ 산책","members":18},{"name":"🎧 음악","members":18}],"top_interest_categories":[{"name":"카페/맛집","members":26},{"name":"여행/아웃도어","members":22},{"name":"운동/활동","members":19}],"top_browse_categories":[{"name":"상위 5% 매력 프로필","members":8},{"name":"지금 내 근처에 있는 이성","members":7},{"name":"오늘 접속한 이성","members":6}],"activity_intensity":22.7,"relationship_depth":1.2,"monetization_signal":0.0,"retention_signal":0.0,"safety_risk":100.0,"core_score":-4.0,"label":"안전 리스크 관찰군","recommended_action":"신고/차단 패턴을 별도 모니터링하고 노출/추천 가중치를 보수적으로 둡니다.","rank":5,"gender_supply_role":"여성 공급 핵심군"}]};
+    const fmtNumber = (value) => new Intl.NumberFormat("ko-KR").format(value || 0);
+    const fmtWon = (value) => `${fmtNumber(Math.round(value || 0))}원`;
+    const chartRefs = {};
+
+    function destroyChart(id) {
+      if (chartRefs[id]) chartRefs[id].destroy();
+    }
+
+    function bar(id, labels, datasets, horizontal = false) {
+      const el = document.getElementById(id);
+      if (!el || !window.Chart) return;
+      destroyChart(id);
+      chartRefs[id] = new Chart(el, {
+        type: "bar",
+        data: { labels, datasets },
+        options: {
+          indexAxis: horizontal ? "y" : "x",
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          plugins: { legend: { display: true, labels: { boxWidth: 12, color: "#425158" } } },
+          scales: {
+            x: { beginAtZero: true, grid: { display: horizontal }, ticks: { color: "#66747b", callback: horizontal ? fmtNumber : undefined } },
+            y: { beginAtZero: true, grid: { color: "#e8eeee" }, ticks: { color: "#66747b", callback: horizontal ? undefined : fmtNumber } }
+          }
+        }
+      });
+    }
+
+    function line(id, labels, datasets) {
+      const el = document.getElementById(id);
+      if (!el || !window.Chart) return;
+      destroyChart(id);
+      chartRefs[id] = new Chart(el, {
+        type: "line",
+        data: { labels, datasets: datasets.map(ds => ({ ...ds, tension: .28, pointRadius: 3, borderWidth: 2 })) },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: "index", intersect: false },
+          plugins: { legend: { display: true, labels: { boxWidth: 12, color: "#425158" } } },
+          scales: {
+            x: { grid: { display: false }, ticks: { color: "#66747b", maxRotation: 0, autoSkip: true } },
+            y: { beginAtZero: true, ticks: { color: "#66747b", callback: fmtNumber }, grid: { color: "#e8eeee" } }
+          }
+        }
+      });
+    }
+
+    function doughnut(id, labels, data) {
+      const el = document.getElementById(id);
+      if (!el || !window.Chart) return;
+      destroyChart(id);
+      chartRefs[id] = new Chart(el, {
+        type: "doughnut",
+        data: { labels, datasets: [{ data, backgroundColor: ["#4f64c8", "#e94f64", "#2f7f82", "#d58c2a"], borderWidth: 0 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: "bottom", labels: { boxWidth: 12, color: "#425158" } } } }
+      });
+    }
+
+    const days = koreaData.daily.map(row => row.day.slice(5).replace("-", "."));
+    line("koreaDailyChart", days, [
+      { label: "가입", data: koreaData.daily.map(row => row.signups), borderColor: "#4f64c8", backgroundColor: "#4f64c8" },
+      { label: "최근 접속", data: koreaData.daily.map(row => row.recent_active_users), borderColor: "#2f7f82", backgroundColor: "#2f7f82" },
+      { label: "좋아요", data: koreaData.daily.map(row => row.likes), borderColor: "#e94f64", backgroundColor: "#e94f64" },
+      { label: "매칭", data: koreaData.daily.map(row => row.matches), borderColor: "#d58c2a", backgroundColor: "#d58c2a" },
+      { label: "메시지", data: koreaData.daily.map(row => row.messages), borderColor: "#7c5cc4", backgroundColor: "#7c5cc4" },
+    ]);
+
+    doughnut("koreaGenderChart", koreaData.signupGender.map(row => row.gender_label), koreaData.signupGender.map(row => row.users));
+    bar("koreaAgeChart", koreaData.signupAge.map(row => row.age_bucket), [{ label: "가입", data: koreaData.signupAge.map(row => row.users), backgroundColor: "#e94f64", borderRadius: 5 }]);
+    bar("koreaActivityAgeChart", koreaData.activityAge.map(row => row.age_bucket), [
+      { label: "좋아요", data: koreaData.activityAge.map(row => row.likes), backgroundColor: "#4f64c8", borderRadius: 5 },
+      { label: "매칭", data: koreaData.activityAge.map(row => row.matches), backgroundColor: "#d58c2a", borderRadius: 5 },
+      { label: "메시지", data: koreaData.activityAge.map(row => row.messages), backgroundColor: "#7c5cc4", borderRadius: 5 },
+    ]);
+
+    bar("koreaInterestChart", koreaData.interestOptions.map(row => row.interest_name), [{ label: "회원", data: koreaData.interestOptions.map(row => row.users), backgroundColor: "#4f64c8", borderRadius: 5 }], true);
+    bar("koreaBrowseChart", koreaData.browse.map(row => row.name), [{ label: "조회", data: koreaData.browse.map(row => row.viewed_count), backgroundColor: "#d58c2a", borderRadius: 5 }], true);
+    bar("koreaSegmentSizeChart", koreaData.clusters.map(row => `#${row.rank} ${row.label}`), [{ label: "회원", data: koreaData.clusters.map(row => row.members), backgroundColor: "#4f64c8", borderRadius: 5 }], true);
+    bar("koreaSegmentScoreChart", koreaData.clusters.map(row => `#${row.rank}`), [{ label: "핵심점수", data: koreaData.clusters.map(row => row.core_score), backgroundColor: "#e94f64", borderRadius: 5 }]);
+    line("koreaAdsDailyChart", koreaData.metaDaily.map(row => row.day.slice(5).replace("-", ".")), [
+      { label: "지출", data: koreaData.metaDaily.map(row => row.spend), borderColor: "#4f64c8", backgroundColor: "#4f64c8" },
+      { label: "결과", data: koreaData.metaDaily.map(row => row.results), borderColor: "#e94f64", backgroundColor: "#e94f64" },
+    ]);
+
+  </script>
+</body>
+</html>
